@@ -10,11 +10,17 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.of(context).pushReplacementNamed('/onboarding');
-    });
     return Scaffold(
-      body: Image.asset('lib/ui/assets/images/splash.png'),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('lib/ui/assets/images/splash.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
     );
   }
 }
