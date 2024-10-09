@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../shared/utils/app_colors.dart';
+
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
 
@@ -37,7 +39,7 @@ class SignUpPage extends StatelessWidget {
                       TextSpan(
                         text: ' PLANT',
                         style: TextStyle(
-                            color: Color.fromRGBO(75, 142, 75, 1),
+                            color: AppColors.primaryGreenColor,
                             fontSize: 28,
                             fontWeight: FontWeight.bold),
                       ),
