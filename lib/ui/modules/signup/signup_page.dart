@@ -37,7 +37,7 @@ class SignUpPage extends StatelessWidget {
                       TextSpan(
                         text: ' PLANT',
                         style: TextStyle(
-                            color: Colors.green,
+                            color: Color.fromRGBO(75, 142, 75, 1),
                             fontSize: 28,
                             fontWeight: FontWeight.bold),
                       ),
