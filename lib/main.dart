@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_garden/ui/modules/product_details/product_details_page.dart';
 
 import 'ui/modules/splash/splash_page.dart';
 
@@ -13,9 +14,10 @@ class MyGardenApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/splash',
+      initialRoute: '/product-details',
       routes: {
         '/splash': (context) => const SplashPage(),
+        '/product-details': (context) => const ProductDetailsPage(),
       },
     );
   }
