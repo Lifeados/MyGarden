@@ -21,10 +21,14 @@ class PlantInfo extends StatelessWidget {
             color: Color(0xFF9AA09A),
           ),
         ),
+        const SizedBox(
+          height: 5,
+        ),
         Text(
           information,
           style: const TextStyle(
             fontSize: 14,
+            fontWeight: FontWeight.bold,
             color: Color(0xFF0E110E),
           ),
         ),
