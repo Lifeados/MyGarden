@@ -15,11 +15,11 @@ class MyGardenApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/product-details',
+      initialRoute: '/splash',
       routes: {
         '/splash': (context) => const SplashPage(),
         '/signup': (context) => const SignUpPage(),
-        '/product-details': (context) => const ProductDetailsPage(),
+        '/product/details': (context) => const ProductDetailsPage(),
       },
     );
   }
