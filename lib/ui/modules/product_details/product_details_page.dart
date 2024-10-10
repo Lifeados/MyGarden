@@ -1,5 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:my_garden/shared/utils/app_colors.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   const ProductDetailsPage({super.key});
@@ -9,15 +11,18 @@ class ProductDetailsPage extends StatefulWidget {
 }
 
 class _ProductDetailsPageState extends State<ProductDetailsPage> {
+  bool isExpanded = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
+        backgroundColor: const Color(0xFFF5F5F5),
         leading: IconButton(
           onPressed: () {},
           icon: SvgPicture.asset(
-            'lib/ui/assets/icons/arrow-left.svg',
+            'lib/ui/assets/icons/arrowleft.svg',
             width: 24,
             height: 24,
           ),
@@ -45,17 +50,74 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               fit: BoxFit.cover,
             ),
             Container(
-              height: 300,
+              padding: const EdgeInsets.all(20),
+              height: 457,
               width: double.infinity,
-              color: Colors.blue,
+              decoration: const BoxDecoration(
+                color: AppColors.cardBackgroundColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                ),
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('Peperomia Flex'),
-                  const Text('4.0 (146 Reviews)'),
                   const Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci, sem feugiat ut nullam nisl orci, volutpat, felis. Nunc elit, et mattis commodo condimentum tellus et. Read More',
+                    'Peperomia Flex',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        'lib/ui/assets/icons/yellowratingstar.svg',
+                      ),
+                      SvgPicture.asset(
+                        'lib/ui/assets/icons/yellowratingstar.svg',
+                      ),
+                      SvgPicture.asset(
+                        'lib/ui/assets/icons/yellowratingstar.svg',
+                      ),
+                      SvgPicture.asset(
+                        'lib/ui/assets/icons/yellowratingstar.svg',
+                      ),
+                      SvgPicture.asset(
+                        'lib/ui/assets/icons/greyratingstar.svg',
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 4),
+                        child: Text('4.0'),
+                      ),
+                      const Text('(146 Reviews)'),
+                    ],
+                  ),
+                  Text(
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci sem feugiat ut nullam nisl orci, volutpat, felis. Nunc elit, et mattis commodo condimentum tellus et. Dolor sit amet, consectetur adipiscing elit. Orci sem feugiat ut nullam nisl orci.',
+                    maxLines: isExpanded ? null : 4,
+                    overflow: isExpanded
+                        ? TextOverflow.visible
+                        : TextOverflow.ellipsis,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isExpanded = !isExpanded;
+                      });
+                    },
+                    child: Text(
+                      isExpanded ? 'Ler menos' : 'Ler mais',
+                      style: const TextStyle(
+                        color: AppColors.primaryGreenColor,
+                      ),
+                    ),
+                  ),
+                  // TextButton(
+                  //   onPressed: () {},
+                  //   child: Text(isExpanded ? 'Ler menos' : 'Ler mais'),
+                  // ),
                   const Divider(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
