@@ -10,6 +10,9 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.of(context).pushReplacementNamed('/onboarding');
+    });
     return Scaffold(
       body: Container(
         width: double.infinity,
