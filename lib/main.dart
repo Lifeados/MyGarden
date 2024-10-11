@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_garden/ui/modules/payment_method/payment_method_page.dart';
 import 'package:my_garden/ui/modules/signup/signup_page.dart';
 
 import 'ui/modules/splash/splash_page.dart';
@@ -14,10 +15,11 @@ class MyGardenApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/signup',
+      initialRoute: '/payment',
       routes: {
         '/splash': (context) => const SplashPage(),
         '/signup': (context) => const SignUpPage(),
+        '/payment': (context) => const PaymentMethodPage(),
       },
     );
   }
