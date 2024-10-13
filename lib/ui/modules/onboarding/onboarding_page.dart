@@ -7,10 +7,10 @@ class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
 
   @override
-  State<OnboardingPage> createState() => _OnboardingPageState();
+  State<OnboardingPage> createState() => OnboardingPageState();
 }
 
-class _OnboardingPageState extends State<OnboardingPage> {
+class OnboardingPageState extends State<OnboardingPage> {
   final PageController _pageController = PageController();
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       body: Column(
         children: [
           Container(
-            height: 600,
+            height: MediaQuery.of(context).size.height * 0.6,
             color: Colors.white,
             child: PageView.builder(
               controller: _pageController,
@@ -52,7 +52,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     children: [
                       Image.asset(
                         imagePaths[index].image,
-                        height: 400,
+                        height: MediaQuery.of(context).size.height * 0.4,
                         width: 295,
                         fit: BoxFit.cover,
                       ),
