@@ -15,11 +15,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xfff5f5f5),
       body: Column(
         children: [
           Container(
             height: 600,
-            color: Colors.white,
+            color: const Color(0xfff5f5f5),
             child: PageView.builder(
               controller: _pageController,
               itemCount: 3,
@@ -112,6 +113,47 @@ class _OnboardingPageState extends State<OnboardingPage> {
               dotColor: Color.fromARGB(255, 169, 182, 192),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      backgroundColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                      fixedSize: const Size(138, 56)),
+                  onPressed: () {},
+                  child: const Text(
+                    'Skip',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      backgroundColor: AppColors.primaryGreenColor,
+                      fixedSize: const Size(138, 56)),
+                  onPressed: () {},
+                  child: const Text(
+                    'Next',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
