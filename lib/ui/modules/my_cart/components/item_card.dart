@@ -17,49 +17,35 @@ class ItemCard extends StatefulWidget {
   });
 
   @override
-  State<ItemCard> createState() => _ItemCardState();
+  State<ItemCard> createState() => ItemCardState();
 }
 
-class _ItemCardState extends State<ItemCard> {
+class ItemCardState extends State<ItemCard> {
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Stack(
-          alignment: AlignmentDirectional.center,
-          children: [
-            Container(
-              width: 144,
-              height: 125,
-              decoration: BoxDecoration(
-                color: AppColors.cardBackgroundColor,
-                borderRadius: BorderRadius.circular(16),
-              ),
+        Container(
+          width: 144,
+          height: 125,
+          padding: const EdgeInsets.all(6),
+          decoration: BoxDecoration(
+            color: AppColors.cardBackgroundColor,
+            borderRadius: BorderRadius.circular(16.0),
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              color: AppColors.background,
+              borderRadius: BorderRadius.circular(16.0),
             ),
-            Stack(
-              alignment: AlignmentDirectional.bottomCenter,
-              children: [
-                Container(
-                  width: 130,
-                  height: 112,
-                  decoration: BoxDecoration(
-                    color: AppColors.background,
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                ),
-                Positioned(
-                  bottom: -6,
-                  child: Image.asset(
-                    widget.imagePath,
-                    width: 105,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ],
-            )
-          ],
+            child: Image.asset(
+              widget.imagePath,
+              width: 105,
+              fit: BoxFit.contain,
+            ),
+          ),
         ),
         SizedBox(
           height: 125,
@@ -158,8 +144,6 @@ class _ItemCardState extends State<ItemCard> {
             onPressed: () {},
             icon: SvgPicture.asset(
               'lib/ui/assets/icons/trash.svg',
-              // height: 22,
-              // width: 22,
               fit: BoxFit.cover,
             ),
           ),

@@ -8,10 +8,10 @@ class MyCartPage extends StatefulWidget {
   const MyCartPage({super.key});
 
   @override
-  State<MyCartPage> createState() => _MyCartPageState();
+  State<MyCartPage> createState() => MyCartPageState();
 }
 
-class _MyCartPageState extends State<MyCartPage> {
+class MyCartPageState extends State<MyCartPage> {
   List<ItemCard> itemCard = [
     const ItemCard(
       imagePath:

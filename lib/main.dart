@@ -16,12 +16,12 @@ class MyGardenApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/my_cart',
+      initialRoute: '/splash',
       routes: {
         '/splash': (context) => const SplashPage(),
         '/signup': (context) => const SignUpPage(),
         '/product/details': (context) => const ProductDetailsPage(),
-        '/my_cart': (context) => const MyCartPage(),
+        '/cart': (context) => const MyCartPage(),
       },
     );
   }
