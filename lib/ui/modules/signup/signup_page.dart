@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../shared/utils/app_colors.dart';
 import 'components/input_garden.dart';
@@ -9,7 +10,7 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.cardBackgroundColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -21,8 +22,8 @@ class SignUpPage extends StatelessWidget {
                   margin: const EdgeInsets.only(bottom: 20),
                   height: 100,
                   width: 100,
-                  child: Image.asset(
-                    'lib/ui/assets/images/logo.png',
+                  child: SvgPicture.asset(
+                    'lib/ui/assets/images/logo.svg',
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -32,7 +33,7 @@ class SignUpPage extends StatelessWidget {
                       TextSpan(
                         text: 'Register Account \nto',
                         style: TextStyle(
-                          color: Colors.black,
+                          color: AppColors.primaryTextColor,
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
                         ),
@@ -51,7 +52,8 @@ class SignUpPage extends StatelessWidget {
                   padding: EdgeInsets.only(top: 5, bottom: 30),
                   child: Text(
                     'Hello there, register to continue',
-                    style: TextStyle(fontSize: 14, color: Colors.grey),
+                    style: TextStyle(
+                        fontSize: 14, color: AppColors.secondaryTextColor),
                   ),
                 ),
                 const InputGarden(
@@ -102,7 +104,8 @@ class SignUpPage extends StatelessWidget {
                           children: [
                             TextSpan(
                               text: 'I agree to the',
-                              style: TextStyle(color: Colors.black),
+                              style:
+                                  TextStyle(color: AppColors.primaryTextColor),
                             ),
                             TextSpan(
                               text: ' Terms & Conditions & Privacy Policy',
@@ -112,7 +115,8 @@ class SignUpPage extends StatelessWidget {
                             ),
                             TextSpan(
                               text: ' set out by this site.',
-                              style: TextStyle(color: Colors.black),
+                              style:
+                                  TextStyle(color: AppColors.primaryTextColor),
                             ),
                           ],
                         ),
@@ -136,26 +140,27 @@ class SignUpPage extends StatelessWidget {
                     onPressed: () {},
                     child: const Text(
                       'Register',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      style: TextStyle(
+                          color: AppColors.cardBackgroundColor, fontSize: 16),
                     ),
                   ),
                 ),
-                Row(
+                const Row(
                   children: [
                     Expanded(
                       child: Divider(
                         thickness: 1,
-                        color: Colors.grey.shade400,
+                        color: AppColors.secondaryTextColor,
                       ),
                     ),
                     Text(
                       ' Or continue with social account ',
-                      style: TextStyle(color: Colors.grey.shade400),
+                      style: TextStyle(color: AppColors.secondaryTextColor),
                     ),
                     Expanded(
                       child: Divider(
                         thickness: 1,
-                        color: Colors.grey.shade400,
+                        color: AppColors.secondaryTextColor,
                       ),
                     ),
                   ],
@@ -168,11 +173,12 @@ class SignUpPage extends StatelessWidget {
                         child: TextButton.icon(
                           style: TextButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 16),
-                            backgroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
+                            backgroundColor: AppColors.cardBackgroundColor,
+                            shape: const RoundedRectangleBorder(
                               side: BorderSide(
-                                  width: 1, color: Colors.grey.shade400),
-                              borderRadius: const BorderRadius.all(
+                                  width: 1,
+                                  color: AppColors.secondaryTextColor),
+                              borderRadius: BorderRadius.all(
                                 Radius.circular(10),
                               ),
                             ),
@@ -180,12 +186,15 @@ class SignUpPage extends StatelessWidget {
                           onPressed: null,
                           label: const Text(
                             'GOOGLE',
-                            style: TextStyle(fontSize: 16, color: Colors.black),
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: AppColors.primaryTextColor),
                           ),
-                          icon: Image.asset(
-                            'lib/ui/assets/icons/google.png',
+                          icon: SvgPicture.asset(
                             height: 24,
                             width: 24,
+                            'lib/ui/assets/icons/google.svg',
+                            fit: BoxFit.contain,
                           ),
                         ),
                       ),
@@ -196,11 +205,12 @@ class SignUpPage extends StatelessWidget {
                         child: TextButton.icon(
                           style: TextButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 16),
-                            backgroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
+                            backgroundColor: AppColors.cardBackgroundColor,
+                            shape: const RoundedRectangleBorder(
                               side: BorderSide(
-                                  width: 1, color: Colors.grey.shade400),
-                              borderRadius: const BorderRadius.all(
+                                  width: 1,
+                                  color: AppColors.secondaryTextColor),
+                              borderRadius: BorderRadius.all(
                                 Radius.circular(10),
                               ),
                             ),
@@ -208,12 +218,15 @@ class SignUpPage extends StatelessWidget {
                           onPressed: null,
                           label: const Text(
                             'FACEBOOK',
-                            style: TextStyle(fontSize: 16, color: Colors.black),
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: AppColors.primaryTextColor),
                           ),
-                          icon: Image.asset(
-                            'lib/ui/assets/icons/facebook.png',
+                          icon: SvgPicture.asset(
                             height: 24,
                             width: 24,
+                            'lib/ui/assets/icons/facebook.svg',
+                            fit: BoxFit.contain,
                           ),
                         ),
                       ),
@@ -226,7 +239,7 @@ class SignUpPage extends StatelessWidget {
                       children: [
                         TextSpan(
                           text: 'Already have an account?',
-                          style: TextStyle(color: Colors.black),
+                          style: TextStyle(color: AppColors.primaryTextColor),
                         ),
                         TextSpan(
                           text: ' Login',

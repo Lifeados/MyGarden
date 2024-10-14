@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_garden/shared/utils/app_colors.dart';
-
+import 'package:flutter_svg/flutter_svg.dart';
+import '../../../shared/utils/app_colors.dart';
 import 'components/order_status.dart';
 
 class PaymentMethodPage extends StatelessWidget {
@@ -9,57 +9,42 @@ class PaymentMethodPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.cardBackgroundColor,
       appBar: AppBar(
         leadingWidth: 70,
-        leading: Image.asset('lib/ui/assets/icons/arrow-left.png'),
-        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          onPressed: () {},
+          icon: SvgPicture.asset(
+            'lib/ui/assets/icons/arrowleft.svg',
+            width: 20,
+            height: 20,
+          ),
+        ),
+        backgroundColor: AppColors.cardBackgroundColor,
         centerTitle: true,
         title: const Text(
           'Checkout',
           style: TextStyle(
-              fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),
+            fontSize: 16,
+            color: AppColors.primaryTextColor,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Stack(children: [
-          SizedBox(
-            height: 50,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  textAlign: TextAlign.center,
-                  '-------------------',
-                  style: TextStyle(
-                      fontSize: 20, color: AppColors.primaryGreenColor),
-                ),
-                Text(
-                  '-------------------',
-                  style: TextStyle(fontSize: 20, color: Colors.grey.shade300),
-                ),
-              ],
-            ),
-          ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              OrderStatus(
-                icon: 'lib/ui/assets/icons/location.png',
-                title: 'Address',
-              ),
-              OrderStatus(
-                icon: 'lib/ui/assets/icons/card.png',
-                title: 'Payment',
-              ),
-              OrderStatus(
-                icon: 'lib/ui/assets/icons/document.png',
-                title: 'Summery',
-              ),
-            ],
-          ),
-        ]),
+      body: const Padding(
+        padding: EdgeInsets.all(20.0),
+        child: OrderStatus(
+          title1: 'Adress',
+          icon1: 'lib/ui/assets/icons/location.svg',
+          iconColor1: AppColors.primaryGreenColor,
+          title2: 'Payment',
+          icon2: 'lib/ui/assets/icons/card.svg',
+          iconColor2: AppColors.primaryGreenColor,
+          title3: 'Summery',
+          icon3: 'lib/ui/assets/icons/document.svg',
+          progressLine1: AppColors.primaryGreenColor,
+          progressLine2: AppColors.secondaryTextColor,
+        ),
       ),
     );
   }
