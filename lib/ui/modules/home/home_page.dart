@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
             IconButton(
               onPressed: () {},
               icon: SvgPicture.asset(
-                'lib/ui/assets/icons/Frame 20.svg',
+                'lib/ui/assets/icons/frame-20.svg',
                 height: 20,
                 width: 20,
               ),
