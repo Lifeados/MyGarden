@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_garden/shared/utils/app_colors.dart';
-import 'package:my_garden/ui/modules/my_cart/components/item_card.dart';
-import 'package:my_garden/ui/modules/my_cart/components/row_value.dart';
+import 'package:my_garden/ui/modules/cart/components/item_card.dart';
+import 'package:my_garden/ui/modules/cart/components/row_value.dart';
 
-class MyCartPage extends StatefulWidget {
-  const MyCartPage({super.key});
+class CartPage extends StatefulWidget {
+  const CartPage({super.key});
 
   @override
-  State<MyCartPage> createState() => MyCartPageState();
+  State<CartPage> createState() => CartPageState();
 }
 
-class MyCartPageState extends State<MyCartPage> {
+class CartPageState extends State<CartPage> {
   List<ItemCard> itemCard = [
     const ItemCard(
       imagePath:
