@@ -4,7 +4,7 @@ import 'package:my_garden/ui/modules/payment_method/payment_method_page.dart';
 import 'package:my_garden/ui/modules/onboarding/onboarding_page.dart';
 import 'ui/modules/product_details/product_details_page.dart';
 import 'package:my_garden/ui/modules/signup/signup_page.dart';
-
+import 'ui/modules/home/home_page.dart';
 import 'ui/modules/splash/splash_page.dart';
 
 void main() {
@@ -26,6 +26,7 @@ class MyGardenApp extends StatelessWidget {
         '/product/details': (context) => const ProductDetailsPage(),
         '/cart': (context) => const CartPage(),
         '/payment': (context) => const PaymentMethodPage(),
+        '/home': (context) => const HomePage(),
       },
     );
   }
