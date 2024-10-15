@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
-
+import 'package:my_garden/ui/modules/onboarding/onboarding_page.dart';
+import 'ui/modules/product_details/product_details_page.dart';
+import 'package:my_garden/ui/modules/signup/signup_page.dart';
 import 'ui/modules/home/home_page.dart';
+import 'ui/modules/splash/splash_page.dart';
 
 void main() {
-  runApp(const MyGarden());
+  runApp(const MyGardenApp());
 }
 
-class MyGarden extends StatefulWidget {
-  const MyGarden({super.key});
+class MyGardenApp extends StatelessWidget {
+  const MyGardenApp({super.key});
 
-  @override
-  State<MyGarden> createState() => _MyGardenState();
-}
-
-class _MyGardenState extends State<MyGarden> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/homePage',
+      initialRoute: '/home',
       routes: {
-        '/homePage': (context) => const HomePage(),
+        '/splash': (context) => const SplashPage(),
+        '/signup': (context) => const SignUpPage(),
+        '/onboarding': (context) => const OnboardingPage(),
+        '/product/details': (context) => const ProductDetailsPage(),
+        '/home': (context) => const HomePage(),
       },
     );
   }
