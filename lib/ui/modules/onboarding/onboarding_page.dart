@@ -12,6 +12,35 @@ class OnboardingPage extends StatefulWidget {
 
 class _OnboardingPageState extends State<OnboardingPage> {
   final PageController _pageController = PageController();
+
+  int currentPage = 0;
+
+  void onPageChanged(int index) {
+    setState(() {
+      currentPage = index;
+    });
+  }
+
+  List<OnbordingData> imagePaths = [
+    OnbordingData(
+      'lib/ui/assets/images/primeira_planta.png',
+      'Best collection of\n',
+      'indoor & outdoor ',
+      'Lorem ipsom dolor sit amet, consectetur\n adipscing elit. Fringillain sed risus sit.',
+    ),
+    OnbordingData(
+      'lib/ui/assets/images/segunda_planta.png',
+      'Keep your\n plants ',
+      'alive',
+      'Lorem ipsom dolor sit amet, consectetur\n adipscing elit. Fringillain sed risus sit.',
+    ),
+    OnbordingData(
+      'lib/ui/assets/images/terceira_planta.png',
+      'Plan a tree & \n green the ',
+      'earth',
+      'Lorem ipsom dolor sit amet, consectetur\n adipscing elit. Fringillain sed risus sit.',
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,30 +51,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
             height: 600,
             color: const Color(0xfff5f5f5),
             child: PageView.builder(
+              onPageChanged: onPageChanged,
               controller: _pageController,
-              itemCount: 3,
+              itemCount: imagePaths.length,
               itemBuilder: (context, index) {
-                List<OnbordingData> imagePaths = [
-                  OnbordingData(
-                    'lib/ui/assets/images/primeira_planta.png',
-                    'Best collection of\n',
-                    'indoor & outdoor ',
-                    'Lorem ipsom dolor sit amet, consectetur\n adipscing elit. Fringillain sed risus sit.',
-                  ),
-                  OnbordingData(
-                    'lib/ui/assets/images/segunda_planta.png',
-                    'Keep your\n plants ',
-                    'alive',
-                    'Lorem ipsom dolor sit amet, consectetur\n adipscing elit. Fringillain sed risus sit.',
-                  ),
-                  OnbordingData(
-                    'lib/ui/assets/images/terceira_planta.png',
-                    'Plan a tree & \n green the ',
-                    'earth',
-                    'Lorem ipsom dolor sit amet, consectetur\n adipscing elit. Fringillain sed risus sit.',
-                  )
-                ];
-
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   child: Column(
@@ -115,44 +124,61 @@ class _OnboardingPageState extends State<OnboardingPage> {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+            child: currentPage == 2
+                ? ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        backgroundColor: AppColors.primaryGreenColor,
+                        fixedSize: const Size(335, 56)),
+                    onPressed: () {},
+                    child: const Text(
+                      'Get Started',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
                       ),
-                      backgroundColor: Colors.transparent,
-                      shadowColor: Colors.transparent,
-                      fixedSize: const Size(138, 56)),
-                  onPressed: () {},
-                  child: const Text(
-                    'Skip',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 15,
                     ),
-                  ),
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            backgroundColor: Colors.transparent,
+                            shadowColor: Colors.transparent,
+                            fixedSize: const Size(138, 56)),
+                        onPressed: () {},
+                        child: const Text(
+                          'Skip',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 15,
+                          ),
+                        ),
                       ),
-                      backgroundColor: AppColors.primaryGreenColor,
-                      fixedSize: const Size(138, 56)),
-                  onPressed: () {},
-                  child: const Text(
-                    'Next',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                    ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            backgroundColor: AppColors.primaryGreenColor,
+                            fixedSize: const Size(138, 56)),
+                        onPressed: () {},
+                        child: const Text(
+                          'Next',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                          ),
+                        ),
+                      )
+                    ],
                   ),
-                )
-              ],
-            ),
           )
         ],
       ),
