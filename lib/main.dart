@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_garden/shared/utils/app_colors.dart';
 import 'package:my_garden/ui/modules/payment_method/payment_method_page.dart';
 import 'package:my_garden/ui/modules/onboarding/onboarding_page.dart';
 import 'ui/modules/product_details/product_details_page.dart';
@@ -16,6 +17,16 @@ class MyGardenApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        radioTheme: RadioThemeData(
+          fillColor: WidgetStateProperty.resolveWith<Color>((states) {
+            if (states.contains(WidgetState.selected)) {
+              return AppColors.primaryGreenColor; // Cor quando marcado
+            }
+            return AppColors.background; // Cor quando desmarcado
+          }),
+        ),
+      ),
       debugShowCheckedModeBanner: false,
       initialRoute: '/splash',
       routes: {
@@ -23,7 +34,7 @@ class MyGardenApp extends StatelessWidget {
         '/signup': (context) => const SignUpPage(),
         '/onboarding': (context) => const OnboardingPage(),
         '/product/details': (context) => const ProductDetailsPage(),
-        '/payment': (context) => const PaymentMethodPage(),
+        '/payment': (context) => PaymentMethodPage(),
       },
     );
   }
