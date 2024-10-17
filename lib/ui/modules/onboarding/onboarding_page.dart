@@ -118,7 +118,7 @@ class OnboardingPageState extends State<OnboardingPage> {
             effect: const WormEffect(
               dotHeight: 10,
               dotWidth: 10,
-              activeDotColor: Colors,
+              activeDotColor: AppColors.primaryGreenColor,
               dotColor: AppColors.secondaryTextColor,
             ),
           ),
