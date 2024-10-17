@@ -12,39 +12,49 @@ class OnboardingPage extends StatefulWidget {
 
 class OnboardingPageState extends State<OnboardingPage> {
   final PageController _pageController = PageController();
+
+  int currentPage = 0;
+
+  void onPageChanged(int index) {
+    setState(() {
+      currentPage = index;
+    });
+  }
+
+  List<OnbordingData> imagePaths = [
+    OnbordingData(
+      'lib/ui/assets/images/primeira_planta.png',
+      'Best collection of\n',
+      'indoor & outdoor ',
+      'Lorem ipsom dolor sit amet, consectetur\n adipscing elit. Fringillain sed risus sit.',
+    ),
+    OnbordingData(
+      'lib/ui/assets/images/segunda_planta.png',
+      'Keep your\n plants ',
+      'alive',
+      'Lorem ipsom dolor sit amet, consectetur\n adipscing elit. Fringillain sed risus sit.',
+    ),
+    OnbordingData(
+      'lib/ui/assets/images/terceira_planta.png',
+      'Plan a tree & \n green the ',
+      'earth',
+      'Lorem ipsom dolor sit amet, consectetur\n adipscing elit. Fringillain sed risus sit.',
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xfff5f5f5),
       body: Column(
         children: [
           Container(
             height: MediaQuery.of(context).size.height * 0.6,
             color: Colors.white,
             child: PageView.builder(
+              onPageChanged: onPageChanged,
               controller: _pageController,
-              itemCount: 3,
+              itemCount: imagePaths.length,
               itemBuilder: (context, index) {
-                List<OnbordingData> imagePaths = [
-                  OnbordingData(
-                    'lib/ui/assets/images/primeira_planta.png',
-                    'Best collection of\n',
-                    'indoor & outdoor ',
-                    'Lorem ipsom dolor sit amet, consectetur\n adipscing elit. Fringillain sed risus sit.',
-                  ),
-                  OnbordingData(
-                    'lib/ui/assets/images/segunda_planta.png',
-                    'Keep your\n plants ',
-                    'alive',
-                    'Lorem ipsom dolor sit amet, consectetur\n adipscing elit. Fringillain sed risus sit.',
-                  ),
-                  OnbordingData(
-                    'lib/ui/assets/images/terceira_planta.png',
-                    'Plan a tree & \n green the ',
-                    'earth',
-                    'Lorem ipsom dolor sit amet, consectetur\n adipscing elit. Fringillain sed risus sit.',
-                  )
-                ];
-
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 5),
                   child: Column(
@@ -108,10 +118,68 @@ class OnboardingPageState extends State<OnboardingPage> {
             effect: const WormEffect(
               dotHeight: 10,
               dotWidth: 10,
-              activeDotColor: Colors.green,
-              dotColor: Color.fromARGB(255, 169, 182, 192),
+              activeDotColor: AppColors.primaryGreenColor,
+              dotColor: AppColors.secondaryTextColor,
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
+            child: currentPage == 2
+                ? ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        backgroundColor: AppColors.primaryGreenColor,
+                        fixedSize: const Size(335, 56)),
+                    onPressed: () {},
+                    child: const Text(
+                      'Get Started',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                      ),
+                    ),
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            backgroundColor: Colors.transparent,
+                            shadowColor: Colors.transparent,
+                            fixedSize: const Size(138, 56)),
+                        onPressed: () {},
+                        child: const Text(
+                          'Skip',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            backgroundColor: AppColors.primaryGreenColor,
+                            fixedSize: const Size(138, 56)),
+                        onPressed: () {},
+                        child: const Text(
+                          'Next',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+          )
         ],
       ),
     );
