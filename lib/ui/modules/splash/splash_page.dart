@@ -4,10 +4,10 @@ class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
 
   @override
-  State<SplashPage> createState() => _SplashPageState();
+  State<SplashPage> createState() => SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
+class SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 3), () {

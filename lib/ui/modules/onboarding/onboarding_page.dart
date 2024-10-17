@@ -7,10 +7,10 @@ class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
 
   @override
-  State<OnboardingPage> createState() => _OnboardingPageState();
+  State<OnboardingPage> createState() => OnboardingPageState();
 }
 
-class _OnboardingPageState extends State<OnboardingPage> {
+class OnboardingPageState extends State<OnboardingPage> {
   final PageController _pageController = PageController();
 
   int currentPage = 0;
@@ -48,8 +48,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
       body: Column(
         children: [
           Container(
-            height: 600,
-            color: const Color(0xfff5f5f5),
+            height: MediaQuery.of(context).size.height * 0.6,
+            color: Colors.white,
             child: PageView.builder(
               onPageChanged: onPageChanged,
               controller: _pageController,
@@ -62,7 +62,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     children: [
                       Image.asset(
                         imagePaths[index].image,
-                        height: 400,
+                        height: MediaQuery.of(context).size.height * 0.4,
                         width: 295,
                         fit: BoxFit.cover,
                       ),
@@ -118,8 +118,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
             effect: const WormEffect(
               dotHeight: 10,
               dotWidth: 10,
-              activeDotColor: Colors.green,
-              dotColor: Color.fromARGB(255, 169, 182, 192),
+              activeDotColor: Colors,
+              dotColor: AppColors.secondaryTextColor,
             ),
           ),
           Padding(
