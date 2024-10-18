@@ -27,7 +27,7 @@ class SavedCardsState extends State<SavedCards> {
       height: 72,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: AppColors.cardBackgroundColor,
+        color: AppColors.primaryWhiteColor,
         boxShadow: const [
           BoxShadow(
             color: AppColors.shadowColor,
