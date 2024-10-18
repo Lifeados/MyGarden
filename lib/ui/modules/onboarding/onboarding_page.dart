@@ -119,7 +119,7 @@ class OnboardingPageState extends State<OnboardingPage> {
               dotHeight: 10,
               dotWidth: 10,
               activeDotColor: AppColors.primaryGreenColor,
-              dotColor: AppColors.secondaryTextColor,
+              dotColor: AppColors.primaryGreyColor,
             ),
           ),
           Padding(

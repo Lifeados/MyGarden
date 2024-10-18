@@ -59,7 +59,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
               padding: const EdgeInsets.all(20),
               width: double.infinity,
               decoration: const BoxDecoration(
-                color: AppColors.cardBackgroundColor,
+                color: AppColors.primaryWhiteColor,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30),
                   topRight: Radius.circular(30),
@@ -72,7 +72,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     'Peperomia Flex',
                     style: TextStyle(
                       fontSize: 20,
-                      color: AppColors.primaryTextColor,
+                      color: AppColors.primaryDarkColor,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -99,19 +99,19 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                           padding: EdgeInsets.symmetric(horizontal: 4),
                           child: Text(
                             '4.0',
-                            style: TextStyle(color: AppColors.primaryTextColor),
+                            style: TextStyle(color: AppColors.primaryDarkColor),
                           ),
                         ),
                         const Text(
                           '(146 Reviews)',
-                          style: TextStyle(color: AppColors.primaryTextColor),
+                          style: TextStyle(color: AppColors.primaryDarkColor),
                         ),
                       ],
                     ),
                   ),
                   Text(
                     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Orci sem feugiat ut nullam nisl orci, volutpat, felis. Nunc elit, et mattis commodo condimentum tellus et. Dolor sit amet, consectetur adipiscing elit. Orci sem feugiat ut nullam nisl orci.',
-                    style: const TextStyle(color: AppColors.primaryTextColor),
+                    style: const TextStyle(color: AppColors.primaryDarkColor),
                     maxLines: isExpanded ? null : 4,
                     overflow: isExpanded
                         ? TextOverflow.visible

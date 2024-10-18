@@ -23,7 +23,7 @@ class PaymentMethodPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.cardBackgroundColor,
+      backgroundColor: AppColors.primaryWhiteColor,
       appBar: AppBar(
         leadingWidth: 70,
         leading: IconButton(
@@ -34,13 +34,13 @@ class PaymentMethodPage extends StatelessWidget {
             height: 20,
           ),
         ),
-        backgroundColor: AppColors.cardBackgroundColor,
+        backgroundColor: AppColors.primaryWhiteColor,
         centerTitle: true,
         title: const Text(
           'Checkout',
           style: TextStyle(
             fontSize: 16,
-            color: AppColors.primaryTextColor,
+            color: AppColors.primaryDarkColor,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -61,7 +61,7 @@ class PaymentMethodPage extends StatelessWidget {
                 title3: 'Summery',
                 icon3: 'lib/ui/assets/icons/document.svg',
                 progressLine1: AppColors.primaryGreenColor,
-                progressLine2: AppColors.secondaryTextColor,
+                progressLine2: AppColors.primaryGreyColor,
               ),
               const Padding(
                 padding: EdgeInsets.only(top: 22, bottom: 12),
@@ -86,7 +86,7 @@ class PaymentMethodPage extends StatelessWidget {
                 margin: const EdgeInsets.only(top: 20, bottom: 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: AppColors.cardBackgroundColor,
+                  color: AppColors.primaryWhiteColor,
                   boxShadow: const [
                     BoxShadow(
                       color: AppColors.shadowColor,

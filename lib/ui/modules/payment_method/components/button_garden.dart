@@ -24,7 +24,7 @@ class ButtonGarden extends StatelessWidget {
         child: Text(
           buttonText,
           style:
-              const TextStyle(color: AppColors.tertiaryTextColor, fontSize: 16),
+              const TextStyle(color: AppColors.primaryGreyColor, fontSize: 16),
         ),
       ),
     );
