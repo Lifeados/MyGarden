@@ -32,7 +32,7 @@ class ShippingAddressPageState extends State<ShippingAddressPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.cardBackgroundColor,
+      backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
         leadingWidth: 70,
         leading: IconButton(
@@ -43,13 +43,13 @@ class ShippingAddressPageState extends State<ShippingAddressPage> {
             height: 20,
           ),
         ),
-        backgroundColor: AppColors.cardBackgroundColor,
+        backgroundColor: AppColors.backgroundColor,
         centerTitle: true,
         title: const Text(
           'Checkout',
           style: TextStyle(
             fontSize: 16,
-            color: AppColors.primaryTextColor,
+            color: AppColors.primaryDarkColor,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -65,11 +65,11 @@ class ShippingAddressPageState extends State<ShippingAddressPage> {
               iconColor1: AppColors.primaryGreenColor,
               title2: 'Payment',
               icon2: 'lib/ui/assets/icons/card.svg',
-              iconColor2: AppColors.primaryTextColor,
+              iconColor2: AppColors.primaryGreenColor,
               title3: 'Summary',
               icon3: 'lib/ui/assets/icons/document.svg',
-              progressLine1: AppColors.secondaryTextColor,
-              progressLine2: AppColors.secondaryTextColor,
+              progressLine1: AppColors.primaryGreyColor,
+              progressLine2: AppColors.primaryGreyColor,
             ),
             const SizedBox(height: 20),
             ListView.builder(
@@ -83,7 +83,7 @@ class ShippingAddressPageState extends State<ShippingAddressPage> {
                   margin: const EdgeInsets.only(top: 20, bottom: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: AppColors.cardBackgroundColor,
+                    color: AppColors.backgroundColor,
                     boxShadow: const [
                       BoxShadow(
                         color: AppColors.shadowColor,
