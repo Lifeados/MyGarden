@@ -45,7 +45,7 @@ class SavedCardsState extends State<SavedCards> {
                 height: 40,
                 width: 40,
                 decoration: BoxDecoration(
-                  color: AppColors.background,
+                  color: AppColors.backgroundColor,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: SvgPicture.asset(

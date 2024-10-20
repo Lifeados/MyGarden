@@ -55,9 +55,9 @@ class CartPageState extends State<CartPage> {
             height: 20,
           ),
         ),
-        backgroundColor: AppColors.background,
+        backgroundColor: AppColors.backgroundColor,
       ),
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.backgroundColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top: 20, right: 20, left: 20),

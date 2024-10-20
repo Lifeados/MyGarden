@@ -37,7 +37,7 @@ class ItemCardState extends State<ItemCard> {
           ),
           child: Container(
             decoration: BoxDecoration(
-              color: AppColors.background,
+              color: AppColors.backgroundColor,
               borderRadius: BorderRadius.circular(16.0),
             ),
             child: Image.asset(
