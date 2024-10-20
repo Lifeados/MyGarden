@@ -11,7 +11,6 @@ class ShippingAddressPage extends StatefulWidget {
   State<ShippingAddressPage> createState() => ShippingAddressPageState();
 }
 
-// Lista de endereços
 final List<Map<String, String>> addresses = [
   {
     'title': 'Home',
@@ -28,7 +27,7 @@ final List<Map<String, String>> addresses = [
 ];
 
 class ShippingAddressPageState extends State<ShippingAddressPage> {
-  final int _selectedAddressIndex = 0; // Para armazenar o endereço selecionado
+  final int _selectedAddressIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +59,6 @@ class ShippingAddressPageState extends State<ShippingAddressPage> {
           padding: const EdgeInsets.all(20.0),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            // Componente de status do pedido
             const OrderStatus(
               title1: 'Address',
               icon1: 'lib/ui/assets/icons/location.svg',
@@ -73,10 +71,7 @@ class ShippingAddressPageState extends State<ShippingAddressPage> {
               progressLine1: AppColors.secondaryTextColor,
               progressLine2: AppColors.secondaryTextColor,
             ),
-            const SizedBox(
-                height: 20), // Espaço entre o status e a lista de endereços
-
-            // ListView.builder para mostrar a lista de endereços
+            const SizedBox(height: 20),
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
