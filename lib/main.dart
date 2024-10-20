@@ -25,7 +25,7 @@ class MyGardenApp extends StatelessWidget {
             if (states.contains(WidgetState.selected)) {
               return AppColors.primaryGreenColor; // Cor quando marcado
             }
-            return AppColors.background; // Cor quando desmarcado
+            return AppColors.backgroundColor; // Cor quando desmarcado
           }),
         ),
       ),

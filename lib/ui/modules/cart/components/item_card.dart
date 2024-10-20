@@ -32,12 +32,12 @@ class ItemCardState extends State<ItemCard> {
           height: 125,
           padding: const EdgeInsets.all(6),
           decoration: BoxDecoration(
-            color: AppColors.cardBackgroundColor,
+            color: AppColors.primaryWhiteColor,
             borderRadius: BorderRadius.circular(16.0),
           ),
           child: Container(
             decoration: BoxDecoration(
-              color: AppColors.background,
+              color: AppColors.backgroundColor,
               borderRadius: BorderRadius.circular(16.0),
             ),
             child: Image.asset(
