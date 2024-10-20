@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_garden/shared/utils/app_colors.dart';
+import 'package:my_garden/ui/modules/payment_method/components/button_garden.dart';
 import 'package:my_garden/ui/modules/payment_method/components/order_status.dart';
 
 class ShippingAddressPage extends StatefulWidget {
@@ -57,67 +58,70 @@ class ShippingAddressPageState extends State<ShippingAddressPage> {
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Componente de status do pedido
-              const OrderStatus(
-                title1: 'Address',
-                icon1: 'lib/ui/assets/icons/location.svg',
-                iconColor1: AppColors.primaryGreenColor,
-                title2: 'Payment',
-                icon2: 'lib/ui/assets/icons/card.svg',
-                iconColor2: AppColors.primaryTextColor,
-                title3: 'Summary',
-                icon3: 'lib/ui/assets/icons/document.svg',
-                progressLine1: AppColors.secondaryTextColor,
-                progressLine2: AppColors.secondaryTextColor,
-              ),
-              const SizedBox(
-                  height: 20), // Espaço entre o status e a lista de endereços
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            // Componente de status do pedido
+            const OrderStatus(
+              title1: 'Address',
+              icon1: 'lib/ui/assets/icons/location.svg',
+              iconColor1: AppColors.primaryGreenColor,
+              title2: 'Payment',
+              icon2: 'lib/ui/assets/icons/card.svg',
+              iconColor2: AppColors.primaryTextColor,
+              title3: 'Summary',
+              icon3: 'lib/ui/assets/icons/document.svg',
+              progressLine1: AppColors.secondaryTextColor,
+              progressLine2: AppColors.secondaryTextColor,
+            ),
+            const SizedBox(
+                height: 20), // Espaço entre o status e a lista de endereços
 
-              // ListView.builder para mostrar a lista de endereços
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: addresses.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: 335,
-                    height: 109,
-                    margin: const EdgeInsets.only(top: 20, bottom: 10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: AppColors.cardBackgroundColor,
-                      boxShadow: const [
-                        BoxShadow(
-                          color: AppColors.shadowColor,
-                          offset: Offset(0, 10),
-                          blurRadius: 30,
-                        ),
-                      ],
-                    ),
-                    child: ListTile(
-                      leading: Radio(
-                        value: index,
-                        groupValue: _selectedAddressIndex,
-                        onChanged: (value) {
-                          setState(() {});
-                        },
+            // ListView.builder para mostrar a lista de endereços
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: addresses.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  width: 335,
+                  height: 109,
+                  margin: const EdgeInsets.only(top: 20, bottom: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: AppColors.cardBackgroundColor,
+                    boxShadow: const [
+                      BoxShadow(
+                        color: AppColors.shadowColor,
+                        offset: Offset(0, 10),
+                        blurRadius: 30,
                       ),
-                      title: Text(
-                        addresses[index]['title']!,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black),
-                      ),
-                      subtitle: Text(addresses[index]['address']!),
-                      trailing: const Icon(Icons.more_vert),
+                    ],
+                  ),
+                  child: ListTile(
+                    leading: Radio(
+                      value: index,
+                      groupValue: _selectedAddressIndex,
+                      onChanged: (value) {
+                        setState(() {});
+                      },
                     ),
-                  );
-                },
-              ),
-            ],
-          ),
+                    title: Text(
+                      addresses[index]['title']!,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
+                    ),
+                    subtitle: Text(addresses[index]['address']!),
+                    trailing: const Icon(Icons.more_vert),
+                  ),
+                );
+              },
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 30, bottom: 15),
+              child: ButtonGarden(buttonText: '+ Add New Address'),
+            ),
+            const ButtonGarden(buttonText: 'Next'),
+          ]),
         ),
       ),
     );
