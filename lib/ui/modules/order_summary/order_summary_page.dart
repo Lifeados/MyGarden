@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:my_garden/shared/utils/app_colors.dart';
+import 'package:my_garden/ui/modules/order_summary/components/delivery_address.dart';
+import 'package:my_garden/ui/modules/order_summary/components/item_details.dart';
+import 'package:my_garden/ui/modules/order_summary/components/payment_details.dart';
 
 class OrderSummaryPage extends StatefulWidget {
   const OrderSummaryPage({super.key});
@@ -14,7 +16,10 @@ class OrderSummaryPageState extends State<OrderSummaryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Checkout'),
+        title: const Text(
+          'Checkout',
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+        ),
         leading: IconButton(
           onPressed: () {},
           icon: SvgPicture.asset(
@@ -38,107 +43,92 @@ class OrderSummaryPageState extends State<OrderSummaryPage> {
               const SizedBox(
                 height: 22,
               ),
-              const Text('Item Details'),
+              const Text(
+                'Item Details',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               const SizedBox(
                 height: 12,
               ),
               Container(
-                color: Colors.green[300],
-                width: double.infinity,
-                child: Column(
-                  children: [
-                    Container(
-                      height: 100,
-                      width: 300,
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: const [
+                    BoxShadow(
                       color: Colors.grey,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: 100,
-                      width: 300,
-                      color: Colors.grey,
-                    ),
+                      spreadRadius: -10,
+                      blurRadius: 25,
+                      offset: Offset(0, 10),
+                    )
                   ],
+                  borderRadius: BorderRadius.circular(16),
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text('Delivery Address'),
-              const SizedBox(
-                height: 12,
-              ),
-              Container(
-                height: 100,
                 width: double.infinity,
-                color: Colors.grey,
-                child: Row(
+                child: const Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('Smith Watson'),
-                          Text('4517 Washington Ave. Manchester, Kentucky'),
-                        ],
-                      ),
+                    ItemDetails(
+                      image: 'lib/ui/assets/images/faux-watermelon.png',
+                      name: 'Peperomia Flex',
+                      price: 60.00,
+                      quantity: 1,
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          height: 50,
-                          width: 50,
-                          color: Colors.black,
-                        ),
-                      ],
+                    SizedBox(
+                      height: 20,
+                    ),
+                    ItemDetails(
+                      image: 'lib/ui/assets/images/faux-watermelon.png',
+                      name: 'Medallion Calathea',
+                      price: 75.00,
+                      quantity: 1,
                     ),
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              const Text('Delivery Address'),
-              const SizedBox(
-                height: 12,
-              ),
-              Container(
-                height: 100,
-                width: 300,
-                color: Colors.grey,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      height: 50,
-                      width: 50,
-                      color: Colors.black,
-                    ),
-                    const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Smith Watson'),
-                        Text('6895 7852 5898 4200'),
-                      ],
-                    ),
-                    Container(
-                      height: 50,
-                      width: 50,
-                      color: Colors.black,
-                    ),
-                  ],
+              const Padding(
+                padding: EdgeInsets.only(top: 20, bottom: 12),
+                child: Text(
+                  'Delivery Address',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-              const SizedBox(
-                height: 20,
+              DeliveryAddress(
+                name: 'Smith Watson',
+                address: '4517 Washington Ave. Manchester, Kentucky 39495',
+                onPressed: () {},
               ),
-              const Text('Order Summary'),
-              const SizedBox(
-                height: 12,
+              const Padding(
+                padding: EdgeInsets.only(top: 20, bottom: 12),
+                child: Text(
+                  'Payment Details',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              PaymentDetails(
+                brandImage: 'lib/ui/assets/icons/mastercard.svg',
+                name: 'Smith Watson',
+                cardNumber: '6895 7852 5898 4200',
+                onPressed: () {},
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 20, bottom: 12),
+                child: Text(
+                  'Order Summary',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
               ElevatedButton(
                 onPressed: () {},
