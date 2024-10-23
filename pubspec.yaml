@@ -9,9 +9,10 @@ environment:
   sdk: ^3.5.1
 
 dependencies:
+  smooth_page_indicator: 1.2.0+3
   flutter:
     sdk: flutter
-
+    
   cupertino_icons: ^1.0.8
   flutter_svg: ^2.0.10+1
 

@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../../shared/utils/app_colors.dart';
-import 'components/input_garden.dart';
+import '../signup/components/input_garden.dart';
 
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryWhiteColor,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -22,8 +20,8 @@ class SignUpPage extends StatelessWidget {
                   margin: const EdgeInsets.only(bottom: 20),
                   height: 100,
                   width: 100,
-                  child: SvgPicture.asset(
-                    'lib/ui/assets/images/logo.svg',
+                  child: Image.asset(
+                    'lib/ui/assets/images/logo.png',
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -31,9 +29,9 @@ class SignUpPage extends StatelessWidget {
                   text: const TextSpan(
                     children: [
                       TextSpan(
-                        text: 'Register Account \nto',
+                        text: 'Welcome Back 👋 \nto',
                         style: TextStyle(
-                          color: AppColors.primaryDarkColor,
+                          color: Colors.black,
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
                         ),
@@ -41,9 +39,10 @@ class SignUpPage extends StatelessWidget {
                       TextSpan(
                         text: ' PLANT',
                         style: TextStyle(
-                            color: AppColors.primaryGreenColor,
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold),
+                          color: AppColors.primaryGreenColor,
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
@@ -51,20 +50,8 @@ class SignUpPage extends StatelessWidget {
                 const Padding(
                   padding: EdgeInsets.only(top: 5, bottom: 30),
                   child: Text(
-                    'Hello there, register to continue',
-                    style: TextStyle(
-                        fontSize: 14, color: AppColors.primaryGreyColor),
-                  ),
-                ),
-                const InputGarden(
-                  label: 'First Name',
-                  obscure: false,
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20),
-                  child: InputGarden(
-                    label: 'Last Name',
-                    obscure: false,
+                    'Hello there, login to continue',
+                    style: TextStyle(fontSize: 14, color: Colors.grey),
                   ),
                 ),
                 const InputGarden(
@@ -78,54 +65,29 @@ class SignUpPage extends StatelessWidget {
                     obscure: true,
                   ),
                 ),
-                const InputGarden(
-                  label: 'Confirm Password',
-                  obscure: true,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(right: 10),
-                      width: 20,
-                      height: 26,
-                      child: Checkbox(
-                        activeColor: AppColors.primaryGreenColor,
-                        value: true,
-                        onChanged: (bool? newValue) {},
-                      ),
-                    ),
-                    Flexible(
-                      child: RichText(
-                        text: const TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'I agree to the',
-                              style:
-                                  TextStyle(color: AppColors.primaryDarkColor),
-                            ),
-                            TextSpan(
-                              text: ' Terms & Conditions & Privacy Policy',
-                              style: TextStyle(
-                                color: AppColors.primaryGreenColor,
-                              ),
-                            ),
-                            TextSpan(
-                              text: ' set out by this site.',
-                              style:
-                                  TextStyle(color: AppColors.primaryDarkColor),
-                            ),
-                          ],
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: Row(
+                    mainAxisAlignment:
+                        MainAxisAlignment.end, // Alinha à direita
+                    children: [
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                            color: AppColors.primaryGreenColor, // Cor do texto
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: 30, bottom: 20),
+                  margin: const EdgeInsets.only(
+                    top: 20,
+                    bottom: 20,
+                  ),
                   width: double.infinity,
                   height: 56,
                   child: TextButton(
@@ -139,28 +101,27 @@ class SignUpPage extends StatelessWidget {
                     ),
                     onPressed: () {},
                     child: const Text(
-                      'Register',
-                      style: TextStyle(
-                          color: AppColors.primaryWhiteColor, fontSize: 16),
+                      'Login',
+                      style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),
                 ),
-                const Row(
+                Row(
                   children: [
                     Expanded(
                       child: Divider(
                         thickness: 1,
-                        color: AppColors.primaryGreyColor,
+                        color: Colors.grey.shade400,
                       ),
                     ),
                     Text(
                       ' Or continue with social account ',
-                      style: TextStyle(color: AppColors.primaryGreyColor),
+                      style: TextStyle(color: Colors.grey.shade400),
                     ),
                     Expanded(
                       child: Divider(
                         thickness: 1,
-                        color: AppColors.primaryGreyColor,
+                        color: Colors.grey.shade400,
                       ),
                     ),
                   ],
@@ -173,11 +134,11 @@ class SignUpPage extends StatelessWidget {
                         child: TextButton.icon(
                           style: TextButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 16),
-                            backgroundColor: AppColors.primaryWhiteColor,
-                            shape: const RoundedRectangleBorder(
+                            backgroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
                               side: BorderSide(
-                                  width: 1, color: AppColors.primaryGreyColor),
-                              borderRadius: BorderRadius.all(
+                                  width: 1, color: Colors.grey.shade400),
+                              borderRadius: const BorderRadius.all(
                                 Radius.circular(10),
                               ),
                             ),
@@ -185,15 +146,12 @@ class SignUpPage extends StatelessWidget {
                           onPressed: null,
                           label: const Text(
                             'GOOGLE',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: AppColors.primaryDarkColor),
+                            style: TextStyle(fontSize: 16, color: Colors.black),
                           ),
-                          icon: SvgPicture.asset(
+                          icon: Image.asset(
+                            'lib/ui/assets/icons/google.png',
                             height: 24,
                             width: 24,
-                            'lib/ui/assets/icons/google.svg',
-                            fit: BoxFit.contain,
                           ),
                         ),
                       ),
@@ -204,11 +162,11 @@ class SignUpPage extends StatelessWidget {
                         child: TextButton.icon(
                           style: TextButton.styleFrom(
                             padding: const EdgeInsets.symmetric(vertical: 16),
-                            backgroundColor: AppColors.primaryWhiteColor,
-                            shape: const RoundedRectangleBorder(
+                            backgroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
                               side: BorderSide(
-                                  width: 1, color: AppColors.primaryGreyColor),
-                              borderRadius: BorderRadius.all(
+                                  width: 1, color: Colors.grey.shade400),
+                              borderRadius: const BorderRadius.all(
                                 Radius.circular(10),
                               ),
                             ),
@@ -216,31 +174,29 @@ class SignUpPage extends StatelessWidget {
                           onPressed: null,
                           label: const Text(
                             'FACEBOOK',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: AppColors.primaryDarkColor),
+                            style: TextStyle(fontSize: 16, color: Colors.black),
                           ),
-                          icon: SvgPicture.asset(
+                          icon: Image.asset(
+                            'lib/ui/assets/icons/facebook.png',
                             height: 24,
                             width: 24,
-                            'lib/ui/assets/icons/facebook.svg',
-                            fit: BoxFit.contain,
                           ),
                         ),
                       ),
                     ],
                   ),
                 ),
+                const SizedBox(height: 54),
                 Center(
                   child: RichText(
                     text: const TextSpan(
                       children: [
                         TextSpan(
-                          text: 'Already have an account?',
-                          style: TextStyle(color: AppColors.primaryDarkColor),
+                          text: 'Didn’t have an account?',
+                          style: TextStyle(color: Colors.black),
                         ),
                         TextSpan(
-                          text: ' Login',
+                          text: ' Register',
                           style: TextStyle(
                             color: AppColors.primaryGreenColor,
                           ),
