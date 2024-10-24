@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'ui/modules/order_summary/order_summary_page.dart';
 import 'package:my_garden/shared/utils/app_colors.dart';
 import 'package:my_garden/ui/modules/cart/cart_page.dart';
 import 'package:my_garden/ui/modules/order_details/order_details.dart';
@@ -39,6 +40,7 @@ class MyGardenApp extends StatelessWidget {
         '/signup': (context) => const SignUpPage(),
         '/onboarding': (context) => const OnboardingPage(),
         '/product/details': (context) => const ProductDetailsPage(),
+        '/order': (context) => const OrderSummaryPage(),
         '/payment': (context) => PaymentMethodPage(),
         '/cart': (context) => const CartPage(),
         '/order/details': (context) => const OrderDetails(),
