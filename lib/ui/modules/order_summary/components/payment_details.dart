@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:my_garden/shared/utils/app_colors.dart';
 
 class PaymentDetails extends StatelessWidget {
   final String brandImage;
@@ -20,13 +21,13 @@ class PaymentDetails extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.primaryWhiteColor,
         boxShadow: const [
           BoxShadow(
-            color: Colors.grey,
-            spreadRadius: -10,
-            blurRadius: 25,
-            offset: Offset(0, 10),
+            color: AppColors.primaryGreyColor,
+            spreadRadius: 1,
+            blurRadius: 10,
+            offset: Offset(0, 12),
           )
         ],
         borderRadius: BorderRadius.circular(16),
@@ -42,7 +43,7 @@ class PaymentDetails extends StatelessWidget {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: Colors.grey[200],
+                color: AppColors.primaryGreyColor,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: SvgPicture.asset(brandImage),
@@ -56,10 +57,14 @@ class PaymentDetails extends StatelessWidget {
                   name,
                   style: const TextStyle(
                     fontSize: 16,
+                    color: AppColors.primaryDarkColor,
                   ),
                 ),
                 Text(
                   cardNumber,
+                  style: const TextStyle(
+                    color: AppColors.primaryDarkColor,
+                  ),
                 ),
               ],
             ),
@@ -72,7 +77,7 @@ class PaymentDetails extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 padding: EdgeInsets.zero,
                 elevation: 0,
-                backgroundColor: Colors.green[100],
+                backgroundColor: AppColors.secondaryGreenColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),

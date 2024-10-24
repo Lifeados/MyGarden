@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../shared/utils/app_colors.dart';
+
 class ItemDetails extends StatelessWidget {
   final String image;
   final String name;
@@ -23,7 +25,7 @@ class ItemDetails extends StatelessWidget {
           padding: const EdgeInsets.only(right: 16),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.grey[200],
+              color: AppColors.primaryGreyColor,
               borderRadius: BorderRadius.circular(10),
             ),
             height: 71,
@@ -42,14 +44,25 @@ class ItemDetails extends StatelessWidget {
                 name,
                 style: const TextStyle(
                   fontSize: 14,
+                  color: AppColors.primaryDarkColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 6),
-                child: Text('\$${price.toStringAsFixed(2)}'),
+                child: Text(
+                  '\$${price.toStringAsFixed(2)}',
+                  style: const TextStyle(
+                    color: AppColors.primaryDarkColor,
+                  ),
+                ),
               ),
-              Text('Qty: $quantity'),
+              Text(
+                'Qty: $quantity',
+                style: const TextStyle(
+                  color: AppColors.primaryDarkColor,
+                ),
+              ),
             ],
           ),
         ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../shared/utils/app_colors.dart';
+
 class DeliveryAddress extends StatelessWidget {
   final String name;
   final String address;
@@ -18,13 +20,13 @@ class DeliveryAddress extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.primaryWhiteColor,
         boxShadow: const [
           BoxShadow(
-            color: Colors.grey,
-            spreadRadius: -10,
-            blurRadius: 25,
-            offset: Offset(0, 10),
+            color: AppColors.primaryGreyColor,
+            spreadRadius: 1,
+            blurRadius: 10,
+            offset: Offset(0, 12),
           )
         ],
         borderRadius: BorderRadius.circular(16),
@@ -44,11 +46,15 @@ class DeliveryAddress extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
+                      color: AppColors.primaryDarkColor,
                     ),
                   ),
                 ),
                 Text(
                   address,
+                  style: const TextStyle(
+                    color: AppColors.primaryDarkColor,
+                  ),
                 ),
               ],
             ),
@@ -61,7 +67,7 @@ class DeliveryAddress extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 padding: EdgeInsets.zero,
                 elevation: 0,
-                backgroundColor: Colors.green[100],
+                backgroundColor: AppColors.secondaryGreenColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),

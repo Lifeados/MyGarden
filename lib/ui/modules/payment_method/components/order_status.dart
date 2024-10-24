@@ -41,11 +41,11 @@ class OrderStatus extends StatelessWidget {
             children: [
               Text(
                 textAlign: TextAlign.center,
-                '-------------------',
+                '--------------',
                 style: TextStyle(fontSize: 20, color: progressLine1),
               ),
               Text(
-                '-------------------',
+                '--------------',
                 style: TextStyle(fontSize: 20, color: progressLine2),
               ),
             ],

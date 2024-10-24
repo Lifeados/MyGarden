@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:my_garden/shared/utils/app_colors.dart';
+import 'package:my_garden/ui/modules/cart/components/row_value.dart';
 import 'package:my_garden/ui/modules/order_summary/components/delivery_address.dart';
 import 'package:my_garden/ui/modules/order_summary/components/item_details.dart';
 import 'package:my_garden/ui/modules/order_summary/components/payment_details.dart';
+import 'package:my_garden/ui/modules/payment_method/components/order_status.dart';
 
 class OrderSummaryPage extends StatefulWidget {
   const OrderSummaryPage({super.key});
@@ -18,7 +21,10 @@ class OrderSummaryPageState extends State<OrderSummaryPage> {
       appBar: AppBar(
         title: const Text(
           'Checkout',
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         leading: IconButton(
           onPressed: () {},
@@ -31,38 +37,44 @@ class OrderSummaryPageState extends State<OrderSummaryPage> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: 100,
-                width: 300,
-                color: Colors.grey,
+              const OrderStatus(
+                title1: 'Address',
+                icon1: 'lib/ui/assets/icons/location.svg',
+                title2: 'Payment',
+                icon2: 'lib/ui/assets/icons/card.svg',
+                title3: 'Summery',
+                icon3: 'lib/ui/assets/icons/document.svg',
+                progressLine1: AppColors.primaryGreenColor,
+                progressLine2: AppColors.primaryGreenColor,
+                iconColor1: AppColors.primaryGreenColor,
+                iconColor2: AppColors.primaryGreenColor,
+                iconColor3: AppColors.primaryGreenColor,
               ),
-              const SizedBox(
-                height: 22,
-              ),
-              const Text(
-                'Item Details',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+              const Padding(
+                padding: EdgeInsets.only(top: 20, bottom: 12),
+                child: Text(
+                  'Item Details',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.primaryDarkColor,
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 12,
               ),
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.primaryWhiteColor,
                   boxShadow: const [
                     BoxShadow(
-                      color: Colors.grey,
-                      spreadRadius: -10,
-                      blurRadius: 25,
-                      offset: Offset(0, 10),
+                      color: AppColors.primaryGreyColor,
+                      spreadRadius: 1,
+                      blurRadius: 10,
+                      offset: Offset(0, 12),
                     )
                   ],
                   borderRadius: BorderRadius.circular(16),
@@ -96,6 +108,7 @@ class OrderSummaryPageState extends State<OrderSummaryPage> {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
+                    color: AppColors.primaryDarkColor,
                   ),
                 ),
               ),
@@ -111,6 +124,7 @@ class OrderSummaryPageState extends State<OrderSummaryPage> {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
+                    color: AppColors.primaryDarkColor,
                   ),
                 ),
               ),
@@ -127,25 +141,75 @@ class OrderSummaryPageState extends State<OrderSummaryPage> {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
+                    color: AppColors.primaryDarkColor,
                   ),
                 ),
               ),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+              const RowValue(
+                label: 'Item Total',
+                value: 135.00,
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 12),
+                child: RowValue(
+                  label: 'Discount',
+                  value: 1.00,
+                  labelStyle: TextStyle(
+                    color: AppColors.primaryGreenColor,
                   ),
-                  elevation: 0,
-                  fixedSize: const Size(300, 56),
-                  backgroundColor: const Color(0xFF4B8E4B),
-                  foregroundColor: const Color(0xFFFFFFFF),
+                  valueStyle: TextStyle(
+                    color: AppColors.primaryGreenColor,
+                  ),
                 ),
-                child: const Text(
-                  'Pay Now',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+              ),
+              const RowValue(
+                label: 'Shipping Charge',
+                value: 3.00,
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 20),
+                child: Divider(
+                  color: AppColors.primaryGreyColor,
+                ),
+              ),
+              const RowValue(
+                label: 'Grand Total',
+                value: 137.00,
+                labelStyle: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primaryDarkColor,
+                ),
+                valueStyle: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.primaryDarkColor,
+                ),
+              ),
+              const SizedBox(
+                height: 33,
+              ),
+              Center(
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      elevation: 0,
+                      fixedSize: const Size.fromHeight(56),
+                      backgroundColor: AppColors.primaryGreenColor,
+                      foregroundColor: AppColors.primaryWhiteColor,
+                    ),
+                    child: const Text(
+                      'Pay Now',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
               ),
