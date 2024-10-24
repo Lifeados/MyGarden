@@ -53,7 +53,7 @@ class SignUpPage extends StatelessWidget {
                   child: Text(
                     'Hello there, register to continue',
                     style: TextStyle(
-                        fontSize: 14, color: AppColors.primaryGreyColor),
+                        fontSize: 14, color: AppColors.secondaryGreyColor),
                   ),
                 ),
                 const InputGarden(
@@ -155,7 +155,7 @@ class SignUpPage extends StatelessWidget {
                     ),
                     Text(
                       ' Or continue with social account ',
-                      style: TextStyle(color: AppColors.primaryGreyColor),
+                      style: TextStyle(color: AppColors.secondaryGreyColor),
                     ),
                     Expanded(
                       child: Divider(
