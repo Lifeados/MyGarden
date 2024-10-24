@@ -27,7 +27,7 @@ class RowValue extends StatelessWidget {
               ),
         ),
         Text(
-          '\$$value',
+          '\$${value.toStringAsFixed(2)}',
           style: valueStyle ??
               const TextStyle(
                 fontSize: 16,
