@@ -44,7 +44,7 @@ class CartPageState extends State<CartPage> {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            color: AppColors.primaryTextColor,
+            color: AppColors.primaryDarkColor,
           ),
         ),
         leading: IconButton(
@@ -55,9 +55,9 @@ class CartPageState extends State<CartPage> {
             height: 20,
           ),
         ),
-        backgroundColor: AppColors.background,
+        backgroundColor: AppColors.backgroundColor,
       ),
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.backgroundColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
@@ -87,11 +87,11 @@ class CartPageState extends State<CartPage> {
                 label: 'Item Total',
                 value: 40.99,
                 labelStyle: TextStyle(
-                  color: AppColors.primaryTextColor,
+                  color: AppColors.primaryDarkColor,
                   fontSize: 16,
                 ),
                 valueStyle: TextStyle(
-                  color: AppColors.primaryTextColor,
+                  color: AppColors.primaryDarkColor,
                   fontSize: 16,
                 ),
               ),
@@ -140,7 +140,7 @@ class CartPageState extends State<CartPage> {
                           elevation: 0,
                           fixedSize: const Size(150, 44),
                           backgroundColor: AppColors.primaryGreenColor,
-                          foregroundColor: AppColors.tertiaryTextColor,
+                          foregroundColor: AppColors.primaryGreyColor,
                         ),
                         child: const Text('Apply Coupon'),
                       ),
@@ -166,11 +166,11 @@ class CartPageState extends State<CartPage> {
                   label: 'Shipping Charge',
                   value: 3.00,
                   labelStyle: TextStyle(
-                    color: AppColors.primaryTextColor,
+                    color: AppColors.primaryDarkColor,
                     fontSize: 16,
                   ),
                   valueStyle: TextStyle(
-                    color: AppColors.primaryTextColor,
+                    color: AppColors.primaryDarkColor,
                     fontSize: 16,
                   ),
                 ),
@@ -182,12 +182,12 @@ class CartPageState extends State<CartPage> {
                   label: 'Grand Total',
                   value: 42.99,
                   labelStyle: TextStyle(
-                    color: AppColors.primaryTextColor,
+                    color: AppColors.primaryDarkColor,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                   valueStyle: TextStyle(
-                    color: AppColors.primaryTextColor,
+                    color: AppColors.primaryDarkColor,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -202,7 +202,7 @@ class CartPageState extends State<CartPage> {
                   elevation: 0,
                   fixedSize: const Size(335, 56),
                   backgroundColor: AppColors.primaryGreenColor,
-                  foregroundColor: AppColors.tertiaryTextColor,
+                  foregroundColor: AppColors.primaryGreyColor,
                 ),
                 child: const Text(
                   'Proceed to Checkout',

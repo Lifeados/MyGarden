@@ -25,7 +25,7 @@ class OrderItem extends StatelessWidget {
                   height: 70,
                   width: 70,
                   decoration: BoxDecoration(
-                    color: AppColors.background,
+                    color: AppColors.backgroundColor,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Image.asset(
@@ -51,12 +51,12 @@ class OrderItem extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
-                        color: Colors.green.shade100,
+                        color: AppColors.backgroundColor,
                       ),
                       child: const Text(
                         'Delivered',
                         style: TextStyle(
-                          color: Colors.green,
+                          color: AppColors.primaryGreenColor,
                         ),
                       ),
                     )
@@ -86,8 +86,8 @@ class OrderItem extends StatelessWidget {
             Expanded(
               child: ButtonGarden(
                 buttonText: 'Return',
-                buttonColor: AppColors.background,
-                textColor: AppColors.primaryTextColor,
+                buttonColor: AppColors.backgroundColor,
+                textColor: AppColors.primaryDarkColor,
                 heightButton: 40,
                 fontSize: 14,
               ),
@@ -98,8 +98,8 @@ class OrderItem extends StatelessWidget {
             Expanded(
               child: ButtonGarden(
                 buttonText: 'Write a Review',
-                buttonColor: AppColors.background,
-                textColor: AppColors.primaryTextColor,
+                buttonColor: AppColors.backgroundColor,
+                textColor: AppColors.primaryDarkColor,
                 heightButton: 40,
                 fontSize: 14,
               ),
@@ -112,7 +112,7 @@ class OrderItem extends StatelessWidget {
         const ButtonGarden(
           buttonText: 'Reorder',
           buttonColor: AppColors.primaryGreenColor,
-          textColor: AppColors.cardBackgroundColor,
+          textColor: AppColors.primaryWhiteColor,
           heightButton: 40,
           fontSize: 14,
         ),
@@ -142,7 +142,7 @@ class OrderItemTwo extends StatelessWidget {
                   height: 70,
                   width: 70,
                   decoration: BoxDecoration(
-                    color: AppColors.background,
+                    color: AppColors.backgroundColor,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Image.asset(
@@ -168,12 +168,12 @@ class OrderItemTwo extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
-                        color: Colors.green.shade100,
+                        color: AppColors.backgroundColor,
                       ),
                       child: const Text(
                         'Placed',
                         style: TextStyle(
-                          color: Colors.green,
+                          color: AppColors.primaryGreenColor,
                         ),
                       ),
                     )
@@ -198,8 +198,8 @@ class OrderItemTwo extends StatelessWidget {
         ),
         const ButtonGarden(
           buttonText: 'Cancel Order',
-          buttonColor: AppColors.background,
-          textColor: AppColors.primaryTextColor,
+          buttonColor: AppColors.backgroundColor,
+          textColor: AppColors.primaryDarkColor,
           heightButton: 40,
           fontSize: 14,
         ),
@@ -229,7 +229,7 @@ class OrderItemThree extends StatelessWidget {
                   height: 70,
                   width: 70,
                   decoration: BoxDecoration(
-                    color: AppColors.background,
+                    color: AppColors.backgroundColor,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Image.asset(
@@ -255,12 +255,12 @@ class OrderItemThree extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(4),
-                        color: Colors.green.shade100,
+                        color: AppColors.backgroundColor,
                       ),
                       child: const Text(
                         'Delivered',
                         style: TextStyle(
-                          color: Colors.green,
+                          color: AppColors.primaryGreenColor,
                         ),
                       ),
                     )
@@ -274,9 +274,12 @@ class OrderItemThree extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 16),
           child: Row(
-            children: List.generate(5, (index) {
-              return SvgPicture.asset('lib/ui/assets/icons/star.svg');
-            }),
+            children: List.generate(
+              5,
+              (index) {
+                return SvgPicture.asset('lib/ui/assets/icons/star.svg');
+              },
+            ),
           ),
         ),
         const Row(
@@ -285,7 +288,7 @@ class OrderItemThree extends StatelessWidget {
               child: ButtonGarden(
                 buttonText: 'Reorder',
                 buttonColor: AppColors.primaryGreenColor,
-                textColor: AppColors.background,
+                textColor: AppColors.primaryWhiteColor,
                 heightButton: 40,
                 fontSize: 14,
               ),
@@ -296,8 +299,8 @@ class OrderItemThree extends StatelessWidget {
             Expanded(
               child: ButtonGarden(
                 buttonText: 'View Details',
-                buttonColor: AppColors.background,
-                textColor: AppColors.primaryTextColor,
+                buttonColor: AppColors.primaryGreyColor,
+                textColor: AppColors.primaryDarkColor,
                 heightButton: 40,
                 fontSize: 14,
               ),

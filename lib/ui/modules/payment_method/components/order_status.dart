@@ -62,7 +62,7 @@ class OrderStatus extends StatelessWidget {
                   height: 50,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: AppColors.background,
+                    color: AppColors.backgroundColor,
                   ),
                   child: Container(
                     height: 24,
@@ -87,7 +87,7 @@ class OrderStatus extends StatelessWidget {
                   height: 50,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: AppColors.background,
+                    color: AppColors.backgroundColor,
                   ),
                   child: Container(
                     height: 24,
@@ -112,7 +112,7 @@ class OrderStatus extends StatelessWidget {
                   height: 50,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: AppColors.background,
+                    color: AppColors.backgroundColor,
                   ),
                   child: Container(
                     height: 24,

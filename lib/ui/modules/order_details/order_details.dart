@@ -11,7 +11,7 @@ class OrderDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.cardBackgroundColor,
+      backgroundColor: AppColors.primaryWhiteColor,
       appBar: AppBar(
         leadingWidth: 70,
         leading: IconButton(
@@ -22,13 +22,13 @@ class OrderDetails extends StatelessWidget {
             height: 20,
           ),
         ),
-        backgroundColor: AppColors.cardBackgroundColor,
+        backgroundColor: AppColors.primaryWhiteColor,
         centerTitle: true,
         title: const Text(
           'Order Details',
           style: TextStyle(
             fontSize: 16,
-            color: AppColors.primaryTextColor,
+            color: AppColors.primaryDarkColor,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -41,7 +41,7 @@ class OrderDetails extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: AppColors.cardBackgroundColor,
+                color: AppColors.primaryWhiteColor,
                 boxShadow: const [
                   BoxShadow(
                     color: AppColors.shadowColor,
@@ -68,7 +68,7 @@ class OrderDetails extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
-                        color: AppColors.secondaryTextColor,
+                        color: AppColors.secondaryGreyColor,
                       ),
                     ),
                   ),
@@ -77,7 +77,7 @@ class OrderDetails extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: 1,
                     separatorBuilder: (context, index) => const Divider(
-                      color: AppColors.shadowColor,
+                      color: AppColors.backgroundColor,
                       thickness: 1,
                     ),
                     itemBuilder: (context, index) {
@@ -89,7 +89,7 @@ class OrderDetails extends StatelessWidget {
                             productName: 'Peperomia Flex',
                           ),
                           Divider(
-                            color: AppColors.shadowColor,
+                            color: AppColors.backgroundColor,
                             height: 40,
                             thickness: 1,
                           ),
@@ -99,7 +99,7 @@ class OrderDetails extends StatelessWidget {
                             productName: 'Peperomia Flex',
                           ),
                           Divider(
-                            color: AppColors.shadowColor,
+                            color: AppColors.backgroundColor,
                             height: 40,
                             thickness: 1,
                           ),
@@ -133,7 +133,7 @@ class OrderDetails extends StatelessWidget {
             ),
             const Divider(
               height: 24,
-              color: AppColors.shadowColor,
+              color: AppColors.backgroundColor,
               thickness: 1,
             ),
             const Text(
@@ -205,7 +205,7 @@ class OrderDetails extends StatelessWidget {
             ),
             const Divider(
               height: 40,
-              color: AppColors.shadowColor,
+              color: AppColors.backgroundColor,
               thickness: 1,
             ),
             const Row(
@@ -235,7 +235,7 @@ class OrderDetails extends StatelessWidget {
         child: const ButtonGarden(
           buttonText: 'View Invocation',
           buttonColor: AppColors.primaryGreenColor,
-          textColor: AppColors.cardBackgroundColor,
+          textColor: AppColors.primaryWhiteColor,
           heightButton: 56,
           fontSize: 16,
           iconButton: 'lib/ui/assets/icons/eye.svg',
