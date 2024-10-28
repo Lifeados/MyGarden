@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:my_garden/ui/modules/home/home_page.dart';
 import 'ui/modules/order_summary/order_summary_page.dart';
 import 'package:my_garden/shared/utils/app_colors.dart';
 import 'package:my_garden/ui/modules/cart/cart_page.dart';
@@ -39,6 +41,7 @@ class MyGardenApp extends StatelessWidget {
         '/login': (context) => const LoginPage(),
         '/signup': (context) => const SignUpPage(),
         '/onboarding': (context) => const OnboardingPage(),
+        '/home': (context) => const HomePage(),
         '/product/details': (context) => const ProductDetailsPage(),
         '/order': (context) => const OrderSummaryPage(),
         '/payment': (context) => PaymentMethodPage(),
