@@ -110,7 +110,6 @@ class OnboardingPageState extends State<OnboardingPage> {
                 },
               ),
             ),
-            // const SizedBox(height: 20),
             SmoothPageIndicator(
               controller: _pageController,
               count: 3,
