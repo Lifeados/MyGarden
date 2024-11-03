@@ -4,8 +4,57 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../shared/utils/app_colors.dart';
 import 'components/input_garden.dart';
 
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
+
+  @override
+  State<SignUpPage> createState() => SignUpPageState();
+}
+
+class SignUpPageState extends State<SignUpPage> {
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
+
+  bool confirmPasswordError = false;
+
+  void checkPasswordMatch() {
+    setState(() {
+      confirmPasswordError =
+          passwordController.text != confirmPasswordController.text;
+    });
+  }
+
+  void register() {
+    checkPasswordMatch();
+
+    if (!confirmPasswordError) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Registro realizado com sucesso')),
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    confirmPasswordController.addListener(checkPasswordMatch);
+  }
+
+  @override
+  void dispose() {
+    confirmPasswordController.removeListener(checkPasswordMatch);
+    confirmPasswordController.dispose();
+    passwordController.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
+    emailController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,34 +105,28 @@ class SignUpPage extends StatelessWidget {
                         fontSize: 14, color: AppColors.secondaryGreyColor),
                   ),
                 ),
-                const InputGarden(
+                InputGarden(
                   label: 'First Name',
-                  obscure: false,
+                  inputController: firstNameController,
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20),
-                  child: InputGarden(
-                    label: 'Last Name',
-                    obscure: false,
-                  ),
+                InputGarden(
+                  label: 'Last Name',
+                  inputController: lastNameController,
                 ),
-                const InputGarden(
+                InputGarden(
                   label: 'Email Address',
-                  obscure: false,
+                  inputController: emailController,
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20),
-                  child: InputGarden(
-                    label: 'Password',
-                    obscure: true,
-                  ),
+                InputGarden(
+                  label: 'Password',
+                  inputController: passwordController,
+                  activeObscure: true,
                 ),
-                const InputGarden(
+                InputGarden(
                   label: 'Confirm Password',
-                  obscure: true,
-                ),
-                const SizedBox(
-                  height: 20,
+                  inputController: confirmPasswordController,
+                  hasExternalError: confirmPasswordError,
+                  activeObscure: true,
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,7 +180,7 @@ class SignUpPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: register,
                     child: const Text(
                       'Register',
                       style: TextStyle(

@@ -9,4 +9,5 @@ class AppColors {
   static const Color backgroundColor = Color(0xFFEEEEEE);
   static const Color shadowColor = Color(0x1A000000);
   static const Color secondaryGreyColor = Color(0xff9AA09A);
+  static const Color errorColor = Color(0xFFFF0000);
 }
