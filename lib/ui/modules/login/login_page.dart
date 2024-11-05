@@ -1,9 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import '../../../shared/utils/app_colors.dart';
 import '../signup/components/input_garden.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => LoginPageState();
+}
+
+class LoginPageState extends State<LoginPage> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +33,13 @@ class LoginPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  margin: const EdgeInsets.only(bottom: 20),
-                  height: 100,
-                  width: 100,
-                  child: Image.asset(
-                    'lib/ui/assets/images/logo.png',
-                    fit: BoxFit.contain,
-                  ),
-                ),
+                    margin: const EdgeInsets.only(bottom: 20),
+                    height: 100,
+                    width: 100,
+                    child: SvgPicture.asset(
+                      'lib/ui/assets/images/logo.svg',
+                      fit: BoxFit.contain,
+                    )),
                 RichText(
                   text: const TextSpan(
                     children: [
@@ -54,33 +69,25 @@ class LoginPage extends StatelessWidget {
                     style: TextStyle(fontSize: 14, color: Colors.grey),
                   ),
                 ),
-                const InputGarden(
+                InputGarden(
                   label: 'Email Address',
-                  obscure: false,
+                  inputController: emailController,
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20),
-                  child: InputGarden(
-                    label: 'Password',
-                    obscure: true,
-                  ),
+                InputGarden(
+                  label: 'Password',
+                  activeObscure: true,
+                  inputController: passwordController,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment.end, // Alinha à direita
-                    children: [
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'Forgot Password?',
-                          style: TextStyle(
-                            color: AppColors.primaryGreenColor, // Cor do texto
-                          ),
-                        ),
+                Container(
+                  alignment: Alignment.topRight,
+                  child: GestureDetector(
+                    child: const Text(
+                      'Forgot Password?',
+                      style: TextStyle(
+                        color: AppColors.primaryGreenColor,
+                        fontSize: 14,
                       ),
-                    ],
+                    ),
                   ),
                 ),
                 Container(
@@ -148,8 +155,8 @@ class LoginPage extends StatelessWidget {
                             'GOOGLE',
                             style: TextStyle(fontSize: 16, color: Colors.black),
                           ),
-                          icon: Image.asset(
-                            'lib/ui/assets/icons/google.png',
+                          icon: SvgPicture.asset(
+                            'lib/ui/assets/icons/google.svg',
                             height: 24,
                             width: 24,
                           ),
@@ -176,8 +183,8 @@ class LoginPage extends StatelessWidget {
                             'FACEBOOK',
                             style: TextStyle(fontSize: 16, color: Colors.black),
                           ),
-                          icon: Image.asset(
-                            'lib/ui/assets/icons/facebook.png',
+                          icon: SvgPicture.asset(
+                            'lib/ui/assets/icons/facebook.svg',
                             height: 24,
                             width: 24,
                           ),
