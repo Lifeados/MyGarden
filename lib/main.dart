@@ -19,7 +19,7 @@ late final CameraDescription firstCamera;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final cameras = await availableCameras();
-  // firstCamera = cameras.first;
+  firstCamera = cameras.first;
 
   runApp(const MyGardenApp());
 }
@@ -41,7 +41,7 @@ class MyGardenApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/login',
+      initialRoute: '/splash',
       routes: {
         '/splash': (context) => const SplashPage(),
         '/login': (context) => const LoginPage(),
