@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:my_garden/data/usecase/remote_load_authentication.dart';
 import 'package:my_garden/domain/validators/email_validator.dart';
 import 'package:my_garden/domain/validators/name_validator.dart';
 import 'package:my_garden/domain/validators/password_validator.dart';
@@ -24,6 +25,8 @@ class SignUpPageState extends State<SignUpPage> {
   final confirmPasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
+  final _remoteLoadAuthentication = RemoteLoadAuthentication();
+
   @override
   void initState() {
     super.initState();
@@ -37,6 +40,26 @@ class SignUpPageState extends State<SignUpPage> {
     lastNameController.dispose();
     emailController.dispose();
     super.dispose();
+  }
+
+  void handleSignUp() async {
+    try {
+      await _remoteLoadAuthentication.createUser(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      if (mounted) {
+        Navigator.pushNamed(context, '/login');
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.toString()),
+          ),
+        );
+      }
+    }
   }
 
   @override
@@ -152,7 +175,7 @@ class SignUpPageState extends State<SignUpPage> {
                   ),
                   onPressed: () {
                     if (_formKey.currentState?.validate() == true) {
-                      return;
+                      handleSignUp();
                     }
                   },
                 ),

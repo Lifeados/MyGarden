@@ -1,5 +1,7 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:camera/camera.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:my_garden/ui/modules/home/home_page.dart';
 import 'ui/modules/order_summary/order_summary_page.dart';
 import 'package:my_garden/shared/utils/app_colors.dart';
@@ -18,8 +20,13 @@ late final CameraDescription firstCamera;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   final cameras = await availableCameras();
-  firstCamera = cameras.first;
+  if (cameras.isNotEmpty) {
+    firstCamera = cameras.first;
+  }
 
   runApp(const MyGardenApp());
 }
@@ -41,7 +48,7 @@ class MyGardenApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/splash',
+      initialRoute: '/signup',
       routes: {
         '/splash': (context) => const SplashPage(),
         '/login': (context) => const LoginPage(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:my_garden/data/usecase/remote_load_authentication.dart';
 import 'package:my_garden/domain/validators/email_validator.dart';
 import 'package:my_garden/domain/validators/password_validator.dart';
 import 'package:my_garden/shared/components/custom_button.dart';
@@ -19,11 +20,33 @@ class LoginPageState extends State<LoginPage> {
   final passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
+  final _remoteLoadAuthentication = RemoteLoadAuthentication();
+
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  void handleSignIn() async {
+    try {
+      await _remoteLoadAuthentication.login(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      if (mounted) {
+        Navigator.pushReplacementNamed(context, '/home');
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.toString()),
+          ),
+        );
+      }
+    }
   }
 
   @override
@@ -113,7 +136,7 @@ class LoginPageState extends State<LoginPage> {
                     ),
                     onPressed: () {
                       if (_formKey.currentState?.validate() == true) {
-                        return;
+                        handleSignIn();
                       }
                     },
                   ),
