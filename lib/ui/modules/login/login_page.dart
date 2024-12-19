@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:my_garden/domain/validators/email_validator.dart';
+import 'package:my_garden/domain/validators/password_validator.dart';
+import 'package:my_garden/shared/components/custom_button.dart';
 import '../../../shared/utils/app_colors.dart';
-import '../signup/components/input_garden.dart';
+import '../../helpers/i18n/resources.dart';
+import '../../../shared/components/custom_text_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -11,8 +15,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -26,191 +31,205 @@ class LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: SingleChildScrollView(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Container(
-                    margin: const EdgeInsets.only(bottom: 20),
-                    height: 100,
-                    width: 100,
-                    child: SvgPicture.asset(
-                      'lib/ui/assets/images/logo.svg',
-                      fit: BoxFit.contain,
-                    )),
-                RichText(
-                  text: const TextSpan(
-                    children: [
-                      TextSpan(
-                        text: 'Welcome Back 👋 \nto',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      TextSpan(
-                        text: ' PLANT',
-                        style: TextStyle(
-                          color: AppColors.primaryGreenColor,
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: SvgPicture.asset(
+                    'lib/ui/assets/images/logo.svg',
+                    height: 75,
+                    width: 68,
+                    fit: BoxFit.contain,
                   ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 5, bottom: 30),
-                  child: Text(
-                    'Hello there, login to continue',
-                    style: TextStyle(fontSize: 14, color: Colors.grey),
-                  ),
-                ),
-                InputGarden(
-                  label: 'Email Address',
-                  inputController: emailController,
-                ),
-                InputGarden(
-                  label: 'Password',
-                  activeObscure: true,
-                  inputController: passwordController,
-                ),
-                Container(
-                  alignment: Alignment.topRight,
-                  child: GestureDetector(
-                    child: const Text(
-                      'Forgot Password?',
-                      style: TextStyle(
-                        color: AppColors.primaryGreenColor,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(
-                    top: 20,
-                    bottom: 20,
-                  ),
-                  width: double.infinity,
-                  height: 56,
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: AppColors.primaryGreenColor,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                    ),
-                    onPressed: () {},
-                    child: const Text(
-                      'Login',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                  ),
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Divider(
-                        thickness: 1,
-                        color: Colors.grey.shade400,
-                      ),
-                    ),
-                    Text(
-                      ' Or continue with social account ',
-                      style: TextStyle(color: Colors.grey.shade400),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        thickness: 1,
-                        color: Colors.grey.shade400,
-                      ),
-                    ),
-                  ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextButton.icon(
-                          style: TextButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            backgroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 1, color: Colors.grey.shade400),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            ),
-                          ),
-                          onPressed: null,
-                          label: const Text(
-                            'GOOGLE',
-                            style: TextStyle(fontSize: 16, color: Colors.black),
-                          ),
-                          icon: SvgPicture.asset(
-                            'lib/ui/assets/icons/google.svg',
-                            height: 24,
-                            width: 24,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                        child: TextButton.icon(
-                          style: TextButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            backgroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 1, color: Colors.grey.shade400),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            ),
-                          ),
-                          onPressed: null,
-                          label: const Text(
-                            'FACEBOOK',
-                            style: TextStyle(fontSize: 16, color: Colors.black),
-                          ),
-                          icon: SvgPicture.asset(
-                            'lib/ui/assets/icons/facebook.svg',
-                            height: 24,
-                            width: 24,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 54),
-                Center(
+                  padding: const EdgeInsets.only(top: 32, bottom: 16),
                   child: RichText(
-                    text: const TextSpan(
+                    text: TextSpan(
                       children: [
                         TextSpan(
-                          text: 'Didn’t have an account?',
-                          style: TextStyle(color: Colors.black),
+                          text: R.string.loginPageTitle,
+                          style: const TextStyle(
+                            color: AppColors.primaryDarkColor,
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         TextSpan(
-                          text: ' Register',
-                          style: TextStyle(
+                          text: R.string.loginPageTitleAppName,
+                          style: const TextStyle(
                             color: AppColors.primaryGreenColor,
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],
                     ),
                   ),
+                ),
+                Text(
+                  R.string.loginPageSubTitle,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: AppColors.secondaryGreyColor,
+                  ),
+                ),
+                const SizedBox(
+                  height: 32,
+                ),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    spacing: 16,
+                    children: [
+                      CustomTextField(
+                        label: R.string.emailLabel,
+                        inputController: emailController,
+                        validator: (value) =>
+                            EmailValidator.validate(value ?? ''),
+                      ),
+                      CustomTextField(
+                        label: R.string.passwordLabel,
+                        inputController: passwordController,
+                        isSecret: true,
+                        validator: (value) =>
+                            PasswordValidator.validate(value ?? ''),
+                      ),
+                    ],
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                    ),
+                    onPressed: () {},
+                    child: Text(
+                      R.string.forgotPassword,
+                      style: const TextStyle(
+                        color: AppColors.primaryGreenColor,
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 32, bottom: 20),
+                  child: SizedBox(
+                    height: 48,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        backgroundColor: AppColors.primaryGreenColor,
+                        foregroundColor: AppColors.primaryWhiteColor,
+                      ),
+                      onPressed: () {
+                        if (_formKey.currentState?.validate() == true) {
+                          print('Tudo certo, logar');
+                        }
+                      },
+                      child: Text(
+                        R.string.loginButton,
+                        style: const TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Row(
+                  spacing: 10,
+                  children: [
+                    const Expanded(
+                      child: Divider(
+                        color: AppColors.secondaryGreyColor,
+                        thickness: 1,
+                      ),
+                    ),
+                    Text(
+                      R.string.alternativeLoginMessage,
+                      style: const TextStyle(
+                        color: AppColors.secondaryGreyColor,
+                      ),
+                    ),
+                    const Expanded(
+                      child: Divider(
+                        color: AppColors.secondaryGreyColor,
+                        thickness: 1,
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20, bottom: 52),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    spacing: 10,
+                    children: [
+                      Expanded(
+                        child: CustomButton(
+                          icon: SvgPicture.asset(
+                            'lib/ui/assets/icons/google.svg',
+                            width: 26,
+                          ),
+                          label: 'Google',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: AppColors.primaryDarkColor,
+                          ),
+                          isOutlined: true,
+                          onPressed: () {},
+                        ),
+                      ),
+                      Expanded(
+                        child: CustomButton(
+                          icon: Image.asset(
+                            'lib/ui/assets/icons/facebook.png',
+                            width: 24,
+                          ),
+                          label: 'Facebook',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: AppColors.primaryDarkColor,
+                          ),
+                          isOutlined: true,
+                          onPressed: () {},
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 4,
+                  children: [
+                    Text(
+                      R.string.messageRegister,
+                      style: const TextStyle(
+                        color: AppColors.primaryDarkColor,
+                      ),
+                    ),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.all(0),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/signup');
+                      },
+                      child: Text(
+                        R.string.registerTextButton,
+                        style: const TextStyle(
+                          color: AppColors.primaryGreenColor,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
