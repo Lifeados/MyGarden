@@ -48,7 +48,7 @@ class MyGardenApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/signup',
+      initialRoute: '/splash',
       routes: {
         '/splash': (context) => const SplashPage(),
         '/login': (context) => const LoginPage(),
