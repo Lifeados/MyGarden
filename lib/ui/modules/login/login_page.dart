@@ -17,7 +17,7 @@ class LoginPage extends StatefulWidget {
 class LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -29,7 +29,7 @@ class LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.primaryWhiteColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -41,41 +41,26 @@ class LoginPageState extends State<LoginPage> {
                   alignment: Alignment.centerLeft,
                   child: SvgPicture.asset(
                     'lib/ui/assets/images/logo.svg',
-                    height: 75,
-                    width: 68,
+                    height: 65,
+                    width: 58,
                     fit: BoxFit.contain,
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 32, bottom: 16),
-                  child: RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: R.string.loginPageTitle,
-                          style: const TextStyle(
-                            color: AppColors.primaryDarkColor,
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        TextSpan(
-                          text: R.string.loginPageTitleAppName,
-                          style: const TextStyle(
-                            color: AppColors.primaryGreenColor,
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
+                  padding: const EdgeInsets.only(top: 32, bottom: 6),
+                  child: Text(
+                    R.string.signInPageTitle,
+                    style: const TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
                 Text(
-                  R.string.loginPageSubTitle,
+                  R.string.subTitle,
                   style: const TextStyle(
-                    fontSize: 16,
-                    color: AppColors.secondaryGreyColor,
+                    fontSize: 15,
+                    color: AppColors.primaryGreenColor,
                   ),
                 ),
                 const SizedBox(
@@ -119,28 +104,15 @@ class LoginPageState extends State<LoginPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 32, bottom: 20),
-                  child: SizedBox(
-                    height: 48,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        backgroundColor: AppColors.primaryGreenColor,
-                        foregroundColor: AppColors.primaryWhiteColor,
-                      ),
-                      onPressed: () {
-                        if (_formKey.currentState?.validate() == true) {
-                          print('Tudo certo, logar');
-                        }
-                      },
-                      child: Text(
-                        R.string.loginButton,
-                        style: const TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
+                  child: CustomButton(
+                    label: R.string.loginButton,
+                    style: const TextStyle(
+                        fontSize: 16, color: AppColors.primaryWhiteColor),
+                    onPressed: () {
+                      if (_formKey.currentState?.validate() == true) {
+                        print('Tudo certo, logar');
+                      }
+                    },
                   ),
                 ),
                 Row(
@@ -212,7 +184,8 @@ class LoginPageState extends State<LoginPage> {
                     Text(
                       R.string.messageRegister,
                       style: const TextStyle(
-                        color: AppColors.primaryDarkColor,
+                        color: AppColors.secondaryGreyColor,
+                        fontSize: 15,
                       ),
                     ),
                     TextButton(
@@ -225,8 +198,9 @@ class LoginPageState extends State<LoginPage> {
                       child: Text(
                         R.string.registerTextButton,
                         style: const TextStyle(
-                          color: AppColors.primaryGreenColor,
-                        ),
+                            color: AppColors.primaryGreenColor,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
