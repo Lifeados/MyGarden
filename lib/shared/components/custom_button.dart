@@ -4,17 +4,17 @@ import 'package:my_garden/shared/utils/app_colors.dart';
 class CustomButton extends StatelessWidget {
   final String label;
   final Widget? icon;
-  final TextStyle style;
+  final TextStyle? style;
   final bool isOutlined;
   final VoidCallback onPressed;
 
   const CustomButton({
     super.key,
     required this.label,
-    this.isOutlined = false,
     required this.onPressed,
-    required this.icon,
-    required this.style,
+    this.isOutlined = false,
+    this.icon,
+    this.style,
   });
 
   @override
