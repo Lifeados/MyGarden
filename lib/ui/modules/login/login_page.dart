@@ -69,7 +69,7 @@ class LoginPageState extends State<LoginPage> {
                 Form(
                   key: _formKey,
                   child: Column(
-                    spacing: 16,
+                    spacing: 12,
                     children: [
                       CustomTextField(
                         label: R.string.emailLabel,
@@ -103,14 +103,17 @@ class LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 32, bottom: 20),
+                  padding: const EdgeInsets.symmetric(vertical: 32),
                   child: CustomButton(
-                    label: R.string.loginButton,
+                    label: R.string.loginTextButton,
                     style: const TextStyle(
-                        fontSize: 16, color: AppColors.primaryWhiteColor),
+                      fontSize: 16,
+                      color: AppColors.primaryWhiteColor,
+                      fontWeight: FontWeight.w600,
+                    ),
                     onPressed: () {
                       if (_formKey.currentState?.validate() == true) {
-                        print('Tudo certo, logar');
+                        return;
                       }
                     },
                   ),
@@ -139,7 +142,7 @@ class LoginPageState extends State<LoginPage> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 20, bottom: 52),
+                  padding: const EdgeInsets.only(top: 32, bottom: 32),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     spacing: 10,
@@ -198,9 +201,10 @@ class LoginPageState extends State<LoginPage> {
                       child: Text(
                         R.string.registerTextButton,
                         style: const TextStyle(
-                            color: AppColors.primaryGreenColor,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold),
+                          color: AppColors.primaryGreenColor,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ],

@@ -19,4 +19,14 @@ class PasswordValidator {
     }
     return null;
   }
+
+  static String? confirmPassword(String password, String confirmPassword) {
+    if (password.isEmpty) {
+      return 'Confirme a senha';
+    }
+    if (password != confirmPassword) {
+      return 'As senhas não são iguais';
+    }
+    return null;
+  }
 }
