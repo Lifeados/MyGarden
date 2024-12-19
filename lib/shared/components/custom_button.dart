@@ -53,42 +53,27 @@ class CustomButton extends StatelessWidget {
         : SizedBox(
             height: 48,
             child: ElevatedButton(
-              onPressed: () {},
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
                 elevation: 0,
-                fixedSize: const Size(double.infinity, 56),
-                backgroundColor: const Color(0xFF4B8E4B),
-                foregroundColor: const Color(0xFFFFFFFF),
+                backgroundColor: AppColors.primaryGreenColor,
+                foregroundColor: AppColors.primaryWhiteColor,
               ),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              onPressed: onPressed,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // SvgPicture.asset(
-                  //   'lib/ui/assets/icons/shoppingcart.svg',
-                  // ),
+                  if (icon != null) ...[
+                    icon!,
+                    const SizedBox(
+                      width: 8,
+                    )
+                  ],
                   Text(
-                    'Add to Cart',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 24,
-                    child: VerticalDivider(
-                      color: Colors.white,
-                    ),
-                  ),
-                  Text(
-                    '\$60.00',
-                    style: TextStyle(
-                      color: Color(0xFFFFFFFF),
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    label,
+                    style: style,
                   ),
                 ],
               ),
