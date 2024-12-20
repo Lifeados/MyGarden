@@ -1,8 +1,14 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:my_garden/data/usecase/remote_load_authentication.dart';
+import 'package:my_garden/domain/validators/email_validator.dart';
+import 'package:my_garden/domain/validators/name_validator.dart';
+import 'package:my_garden/domain/validators/password_validator.dart';
+import 'package:my_garden/shared/components/custom_button.dart';
+import '../../helpers/i18n/resources.dart';
 import '../../../shared/utils/app_colors.dart';
-import 'components/input_garden.dart';
+import '../../../shared/components/custom_text_field.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -12,42 +18,22 @@ class SignUpPage extends StatefulWidget {
 }
 
 class SignUpPageState extends State<SignUpPage> {
-  final TextEditingController firstNameController = TextEditingController();
-  final TextEditingController lastNameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
-  bool confirmPasswordError = false;
-
-  void checkPasswordMatch() {
-    setState(() {
-      confirmPasswordError =
-          passwordController.text != confirmPasswordController.text;
-    });
-  }
-
-  void register() {
-    checkPasswordMatch();
-
-    if (!confirmPasswordError) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Registro realizado com sucesso')),
-      );
-    }
-  }
+  final _remoteLoadAuthentication = RemoteLoadAuthentication();
 
   @override
   void initState() {
     super.initState();
-
-    confirmPasswordController.addListener(checkPasswordMatch);
   }
 
   @override
   void dispose() {
-    confirmPasswordController.removeListener(checkPasswordMatch);
     confirmPasswordController.dispose();
     passwordController.dispose();
     firstNameController.dispose();
@@ -56,241 +42,174 @@ class SignUpPageState extends State<SignUpPage> {
     super.dispose();
   }
 
+  void handleSignUp() async {
+    try {
+      await _remoteLoadAuthentication.createUser(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      if (mounted) {
+        Navigator.pushNamed(context, '/login');
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.toString()),
+          ),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primaryWhiteColor,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: SingleChildScrollView(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Container(
-                  margin: const EdgeInsets.only(bottom: 20),
-                  height: 100,
-                  width: 100,
+                Align(
+                  alignment: Alignment.centerLeft,
                   child: SvgPicture.asset(
                     'lib/ui/assets/images/logo.svg',
+                    height: 65,
+                    width: 58,
                     fit: BoxFit.contain,
                   ),
                 ),
-                RichText(
-                  text: const TextSpan(
+                Padding(
+                  padding: const EdgeInsets.only(top: 32, bottom: 6),
+                  child: Text(
+                    R.string.signUpPageTitle,
+                    style: const TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                Text(
+                  R.string.subTitle,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    color: AppColors.primaryGreenColor,
+                  ),
+                ),
+                const SizedBox(
+                  height: 32,
+                ),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    spacing: 12,
                     children: [
-                      TextSpan(
-                        text: 'Register Account \nto',
-                        style: TextStyle(
-                          color: AppColors.primaryDarkColor,
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      CustomTextField(
+                        label: R.string.nameLabel,
+                        inputController: firstNameController,
+                        validator: (value) =>
+                            NameValidator.validate(value ?? ''),
                       ),
-                      TextSpan(
-                        text: ' PLANT',
-                        style: TextStyle(
-                            color: AppColors.primaryGreenColor,
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold),
+                      CustomTextField(
+                        label: R.string.lastNameLabel,
+                        inputController: lastNameController,
+                        validator: (value) =>
+                            NameValidator.lastNameValidate(value ?? ''),
+                      ),
+                      CustomTextField(
+                        label: R.string.emailLabel,
+                        inputController: emailController,
+                        validator: (value) =>
+                            EmailValidator.validate(value ?? ''),
+                      ),
+                      CustomTextField(
+                        label: R.string.passwordLabel,
+                        inputController: passwordController,
+                        isSecret: true,
+                        validator: (value) =>
+                            PasswordValidator.validate(value ?? ''),
+                      ),
+                      CustomTextField(
+                        label: R.string.confirmPasswordLabel,
+                        inputController: confirmPasswordController,
+                        validator: (value) => PasswordValidator.confirmPassword(
+                            passwordController.text,
+                            confirmPasswordController.text),
+                        isSecret: true,
                       ),
                     ],
                   ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 5, bottom: 30),
-                  child: Text(
-                    'Hello there, register to continue',
-                    style: TextStyle(
-                        fontSize: 14, color: AppColors.secondaryGreyColor),
-                  ),
-                ),
-                InputGarden(
-                  label: 'First Name',
-                  inputController: firstNameController,
-                ),
-                InputGarden(
-                  label: 'Last Name',
-                  inputController: lastNameController,
-                ),
-                InputGarden(
-                  label: 'Email Address',
-                  inputController: emailController,
-                ),
-                InputGarden(
-                  label: 'Password',
-                  inputController: passwordController,
-                  activeObscure: true,
-                ),
-                InputGarden(
-                  label: 'Confirm Password',
-                  inputController: confirmPasswordController,
-                  hasExternalError: confirmPasswordError,
-                  activeObscure: true,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(right: 10),
-                      width: 20,
-                      height: 26,
-                      child: Checkbox(
-                        activeColor: AppColors.primaryGreenColor,
-                        value: true,
-                        onChanged: (bool? newValue) {},
-                      ),
-                    ),
-                    Flexible(
-                      child: RichText(
-                        text: const TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'I agree to the',
-                              style:
-                                  TextStyle(color: AppColors.primaryDarkColor),
-                            ),
-                            TextSpan(
-                              text: ' Terms & Conditions & Privacy Policy',
-                              style: TextStyle(
-                                color: AppColors.primaryGreenColor,
-                              ),
-                            ),
-                            TextSpan(
-                              text: ' set out by this site.',
-                              style:
-                                  TextStyle(color: AppColors.primaryDarkColor),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 30, bottom: 20),
-                  width: double.infinity,
-                  height: 56,
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: AppColors.primaryGreenColor,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                    ),
-                    onPressed: register,
-                    child: const Text(
-                      'Register',
-                      style: TextStyle(
-                          color: AppColors.primaryWhiteColor, fontSize: 16),
-                    ),
-                  ),
-                ),
-                const Row(
-                  children: [
-                    Expanded(
-                      child: Divider(
-                        thickness: 1,
-                        color: AppColors.primaryGreyColor,
-                      ),
-                    ),
-                    Text(
-                      ' Or continue with social account ',
-                      style: TextStyle(color: AppColors.secondaryGreyColor),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        thickness: 1,
-                        color: AppColors.primaryGreyColor,
-                      ),
-                    ),
-                  ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: TextButton.icon(
-                          style: TextButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            backgroundColor: AppColors.primaryWhiteColor,
-                            shape: const RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 1, color: AppColors.primaryGreyColor),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            ),
-                          ),
-                          onPressed: null,
-                          label: const Text(
-                            'GOOGLE',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: AppColors.primaryDarkColor),
-                          ),
-                          icon: SvgPicture.asset(
-                            height: 24,
-                            width: 24,
-                            'lib/ui/assets/icons/google.svg',
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                        child: TextButton.icon(
-                          style: TextButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            backgroundColor: AppColors.primaryWhiteColor,
-                            shape: const RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 1, color: AppColors.primaryGreyColor),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            ),
-                          ),
-                          onPressed: null,
-                          label: const Text(
-                            'FACEBOOK',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: AppColors.primaryDarkColor),
-                          ),
-                          icon: SvgPicture.asset(
-                            height: 24,
-                            width: 24,
-                            'lib/ui/assets/icons/facebook.svg',
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Center(
+                  padding: const EdgeInsets.only(top: 12, bottom: 32),
                   child: RichText(
-                    text: const TextSpan(
+                    text: TextSpan(
+                      text: R.string.termsAndConditions,
+                      style: const TextStyle(
+                        color: AppColors.primaryDarkColor,
+                        fontSize: 14,
+                      ),
                       children: [
                         TextSpan(
-                          text: 'Already have an account?',
-                          style: TextStyle(color: AppColors.primaryDarkColor),
-                        ),
-                        TextSpan(
-                          text: ' Login',
-                          style: TextStyle(
+                          text: R.string.termsAndConditionsButton,
+                          style: const TextStyle(
                             color: AppColors.primaryGreenColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
                           ),
+                          recognizer: TapGestureRecognizer()..onTap = () {},
                         ),
                       ],
                     ),
                   ),
+                ),
+                CustomButton(
+                  label: R.string.registerTextButton,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: AppColors.primaryWhiteColor,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  onPressed: () {
+                    if (_formKey.currentState?.validate() == true) {
+                      handleSignUp();
+                    }
+                  },
+                ),
+                const SizedBox(
+                  height: 32,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 4,
+                  children: [
+                    Text(
+                      R.string.messageLogin,
+                      style: const TextStyle(
+                        color: AppColors.secondaryGreyColor,
+                        fontSize: 15,
+                      ),
+                    ),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.all(0),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/login');
+                      },
+                      child: Text(
+                        R.string.loginTextButton,
+                        style: const TextStyle(
+                          color: AppColors.primaryGreenColor,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

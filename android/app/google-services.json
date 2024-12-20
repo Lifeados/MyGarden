@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "400002344582",
+    "project_id": "plats-app-686f5",
+    "storage_bucket": "plats-app-686f5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:400002344582:android:7e9a39b41b7a34421c9307",
+        "android_client_info": {
+          "package_name": "com.example.my_garden"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvEl04_f2LgLJ-nvp--CSYAjnD7b3QJ-M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:my_garden/data/usecase/remote_load_authentication.dart';
+import 'package:my_garden/domain/validators/email_validator.dart';
+import 'package:my_garden/domain/validators/password_validator.dart';
+import 'package:my_garden/shared/components/custom_button.dart';
 import '../../../shared/utils/app_colors.dart';
-import '../signup/components/input_garden.dart';
+import '../../helpers/i18n/resources.dart';
+import '../../../shared/components/custom_text_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -11,8 +16,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  final _remoteLoadAuthentication = RemoteLoadAuthentication();
 
   @override
   void dispose() {
@@ -21,196 +29,208 @@ class LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+  void handleSignIn() async {
+    try {
+      await _remoteLoadAuthentication.login(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+      if (mounted) {
+        Navigator.pushReplacementNamed(context, '/home');
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.toString()),
+          ),
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.primaryWhiteColor,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: SingleChildScrollView(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 32),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Container(
-                    margin: const EdgeInsets.only(bottom: 20),
-                    height: 100,
-                    width: 100,
-                    child: SvgPicture.asset(
-                      'lib/ui/assets/images/logo.svg',
-                      fit: BoxFit.contain,
-                    )),
-                RichText(
-                  text: const TextSpan(
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: SvgPicture.asset(
+                    'lib/ui/assets/images/logo.svg',
+                    height: 65,
+                    width: 58,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 32, bottom: 6),
+                  child: Text(
+                    R.string.signInPageTitle,
+                    style: const TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                Text(
+                  R.string.subTitle,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    color: AppColors.primaryGreenColor,
+                  ),
+                ),
+                const SizedBox(
+                  height: 32,
+                ),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    spacing: 12,
                     children: [
-                      TextSpan(
-                        text: 'Welcome Back 👋 \nto',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      CustomTextField(
+                        label: R.string.emailLabel,
+                        inputController: emailController,
+                        validator: (value) =>
+                            EmailValidator.validate(value ?? ''),
                       ),
-                      TextSpan(
-                        text: ' PLANT',
-                        style: TextStyle(
-                          color: AppColors.primaryGreenColor,
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      CustomTextField(
+                        label: R.string.passwordLabel,
+                        inputController: passwordController,
+                        isSecret: true,
+                        validator: (value) =>
+                            PasswordValidator.validate(value ?? ''),
                       ),
                     ],
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 5, bottom: 30),
-                  child: Text(
-                    'Hello there, login to continue',
-                    style: TextStyle(fontSize: 14, color: Colors.grey),
-                  ),
-                ),
-                InputGarden(
-                  label: 'Email Address',
-                  inputController: emailController,
-                ),
-                InputGarden(
-                  label: 'Password',
-                  activeObscure: true,
-                  inputController: passwordController,
-                ),
-                Container(
-                  alignment: Alignment.topRight,
-                  child: GestureDetector(
-                    child: const Text(
-                      'Forgot Password?',
-                      style: TextStyle(
-                        color: AppColors.primaryGreenColor,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(
-                    top: 20,
-                    bottom: 20,
-                  ),
-                  width: double.infinity,
-                  height: 56,
+                Align(
+                  alignment: Alignment.centerRight,
                   child: TextButton(
                     style: TextButton.styleFrom(
-                      backgroundColor: AppColors.primaryGreenColor,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
+                      padding: EdgeInsets.zero,
                     ),
                     onPressed: () {},
-                    child: const Text(
-                      'Login',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    child: Text(
+                      R.string.forgotPassword,
+                      style: const TextStyle(
+                        color: AppColors.primaryGreenColor,
+                      ),
                     ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 32),
+                  child: CustomButton(
+                    label: R.string.loginTextButton,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: AppColors.primaryWhiteColor,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    onPressed: () {
+                      if (_formKey.currentState?.validate() == true) {
+                        handleSignIn();
+                      }
+                    },
                   ),
                 ),
                 Row(
+                  spacing: 10,
                   children: [
-                    Expanded(
+                    const Expanded(
                       child: Divider(
+                        color: AppColors.secondaryGreyColor,
                         thickness: 1,
-                        color: Colors.grey.shade400,
                       ),
                     ),
                     Text(
-                      ' Or continue with social account ',
-                      style: TextStyle(color: Colors.grey.shade400),
+                      R.string.alternativeLoginMessage,
+                      style: const TextStyle(
+                        color: AppColors.secondaryGreyColor,
+                      ),
                     ),
-                    Expanded(
+                    const Expanded(
                       child: Divider(
+                        color: AppColors.secondaryGreyColor,
                         thickness: 1,
-                        color: Colors.grey.shade400,
                       ),
                     ),
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  padding: const EdgeInsets.only(top: 32, bottom: 32),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    spacing: 10,
                     children: [
                       Expanded(
-                        child: TextButton.icon(
-                          style: TextButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            backgroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 1, color: Colors.grey.shade400),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            ),
-                          ),
-                          onPressed: null,
-                          label: const Text(
-                            'GOOGLE',
-                            style: TextStyle(fontSize: 16, color: Colors.black),
-                          ),
+                        child: CustomButton(
                           icon: SvgPicture.asset(
                             'lib/ui/assets/icons/google.svg',
-                            height: 24,
-                            width: 24,
+                            width: 26,
                           ),
+                          label: 'Google',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: AppColors.primaryDarkColor,
+                          ),
+                          isOutlined: true,
+                          onPressed: () {},
                         ),
                       ),
-                      const SizedBox(
-                        width: 10,
-                      ),
                       Expanded(
-                        child: TextButton.icon(
-                          style: TextButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            backgroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              side: BorderSide(
-                                  width: 1, color: Colors.grey.shade400),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(10),
-                              ),
-                            ),
-                          ),
-                          onPressed: null,
-                          label: const Text(
-                            'FACEBOOK',
-                            style: TextStyle(fontSize: 16, color: Colors.black),
-                          ),
-                          icon: SvgPicture.asset(
-                            'lib/ui/assets/icons/facebook.svg',
-                            height: 24,
+                        child: CustomButton(
+                          icon: Image.asset(
+                            'lib/ui/assets/icons/facebook.png',
                             width: 24,
                           ),
+                          label: 'Facebook',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: AppColors.primaryDarkColor,
+                          ),
+                          isOutlined: true,
+                          onPressed: () {},
                         ),
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(height: 54),
-                Center(
-                  child: RichText(
-                    text: const TextSpan(
-                      children: [
-                        TextSpan(
-                          text: 'Didn’t have an account?',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        TextSpan(
-                          text: ' Register',
-                          style: TextStyle(
-                            color: AppColors.primaryGreenColor,
-                          ),
-                        ),
-                      ],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 4,
+                  children: [
+                    Text(
+                      R.string.messageRegister,
+                      style: const TextStyle(
+                        color: AppColors.secondaryGreyColor,
+                        fontSize: 15,
+                      ),
                     ),
-                  ),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.all(0),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/signup');
+                      },
+                      child: Text(
+                        R.string.registerTextButton,
+                        style: const TextStyle(
+                          color: AppColors.primaryGreenColor,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
