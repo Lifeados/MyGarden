@@ -49,6 +49,24 @@ class LoginPageState extends State<LoginPage> {
     }
   }
 
+  void handleGoogleSignIn() async {
+    try {
+      final user = await _remoteLoadAuthentication.signInWithGoogle();
+
+      if (user != null) {
+        Navigator.pushReplacementNamed(context, '/home');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Login cancelado.')),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro ao autenticar com o Google: $e')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -182,7 +200,9 @@ class LoginPageState extends State<LoginPage> {
                             color: AppColors.primaryDarkColor,
                           ),
                           isOutlined: true,
-                          onPressed: () {},
+                          onPressed: () {
+                            handleGoogleSignIn();
+                          },
                         ),
                       ),
                       Expanded(
