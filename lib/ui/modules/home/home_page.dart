@@ -125,8 +125,8 @@ class HomePageState extends State<HomePage> {
                     elevation: 0,
                     backgroundColor: AppColors.primaryGreyColor,
                     foregroundColor: AppColors.primaryDarkColor),
-                onPressed: () {
-                  _remoteLoadAuthentication.signOut();
+                onPressed: () async {
+                  await _remoteLoadAuthentication.signOut();
                   Navigator.pushReplacementNamed(context, '/login');
                 },
                 child: const Row(
