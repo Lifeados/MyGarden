@@ -50,16 +50,10 @@ class LoginPageState extends State<LoginPage> {
   }
 
   void handleGoogleSignIn() async {
-    try {
-      final user = await _remoteLoadAuthentication.signInWithGoogle();
+    final user = await _remoteLoadAuthentication.signInWithGoogle();
 
-      if (user != null) {
-        Navigator.pushReplacementNamed(context, '/home');
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Erro ao autenticar com o Google')),
-      );
+    if (user != null) {
+      Navigator.pushReplacementNamed(context, '/home');
     }
   }
 

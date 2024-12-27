@@ -56,7 +56,7 @@ class RemoteLoadAuthentication {
     } on FirebaseAuthException catch (e) {
       _handleAuthError(e);
     } catch (e) {
-      throw Exception('Erro inesperado $e');
+      throw Exception('Login falhou ou foi cancelado $e');
     }
 
     return null;
