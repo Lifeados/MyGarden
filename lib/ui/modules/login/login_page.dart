@@ -55,14 +55,10 @@ class LoginPageState extends State<LoginPage> {
 
       if (user != null) {
         Navigator.pushReplacementNamed(context, '/home');
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Login cancelado.')),
-        );
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Erro ao autenticar com o Google: $e')),
+        const SnackBar(content: Text('Erro ao autenticar com o Google')),
       );
     }
   }
@@ -184,43 +180,20 @@ class LoginPageState extends State<LoginPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 32, bottom: 32),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    spacing: 10,
-                    children: [
-                      Expanded(
-                        child: CustomButton(
-                          icon: SvgPicture.asset(
-                            'lib/ui/assets/icons/google.svg',
-                            width: 26,
-                          ),
-                          label: 'Google',
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: AppColors.primaryDarkColor,
-                          ),
-                          isOutlined: true,
-                          onPressed: () {
-                            handleGoogleSignIn();
-                          },
-                        ),
-                      ),
-                      Expanded(
-                        child: CustomButton(
-                          icon: Image.asset(
-                            'lib/ui/assets/icons/facebook.png',
-                            width: 24,
-                          ),
-                          label: 'Facebook',
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: AppColors.primaryDarkColor,
-                          ),
-                          isOutlined: true,
-                          onPressed: () {},
-                        ),
-                      ),
-                    ],
+                  child: CustomButton(
+                    icon: SvgPicture.asset(
+                      'lib/ui/assets/icons/google.svg',
+                      width: 26,
+                    ),
+                    label: 'Google',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: AppColors.primaryDarkColor,
+                    ),
+                    isOutlined: true,
+                    onPressed: () {
+                      handleGoogleSignIn();
+                    },
                   ),
                 ),
                 Row(

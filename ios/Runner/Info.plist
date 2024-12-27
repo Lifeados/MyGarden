@@ -56,21 +56,10 @@
 						<string>Editor</string>
 						<key>CFBundleURLSchemes</key>
 						<array>
-								<string>fb1694501364454494</string>
 								<string>com.googleusercontent.apps.400002344582-oh1vtq4a0fikagub9b1fc5h64kb8r0o5</string>
 						</array>
 				</dict>
 		</array>
-				<key>FacebookAppID</key>
-				<string>1694501364454494</string>
-				<key>FacebookClientToken</key>
-				<string>af14fdc9d65b628b495b4fe89ec4463e</string>
-				<key>FacebookDisplayName</key>
-				<string>FeltrinAuthentication</string>
-				<key>LSApplicationQueriesSchemes</key>
-			<array>
-				<string>fbapi</string>
-				<string>fb-messenger-share-api</string>
-			</array>	
+				
 	</dict>
 </plist>
