@@ -4,6 +4,8 @@ import 'package:my_garden/data/usecase/remote_load_authentication.dart';
 import 'package:my_garden/domain/validators/email_validator.dart';
 import 'package:my_garden/domain/validators/password_validator.dart';
 import 'package:my_garden/shared/components/custom_button.dart';
+import 'package:provider/provider.dart';
+import '../../../data/usecase/authentication_provider.dart';
 import '../../../shared/utils/app_colors.dart';
 import '../../helpers/i18n/resources.dart';
 import '../../../shared/components/custom_text_field.dart';
@@ -49,16 +51,12 @@ class LoginPageState extends State<LoginPage> {
     }
   }
 
-  void handleGoogleSignIn() async {
-    final user = await _remoteLoadAuthentication.signInWithGoogle();
-
-    if (user != null) {
-      Navigator.pushReplacementNamed(context, '/home');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthenticationProvider>(
+      context,
+      listen: false,
+    );
     return Scaffold(
       backgroundColor: AppColors.primaryWhiteColor,
       body: SafeArea(
@@ -185,8 +183,16 @@ class LoginPageState extends State<LoginPage> {
                       color: AppColors.primaryDarkColor,
                     ),
                     isOutlined: true,
-                    onPressed: () {
-                      handleGoogleSignIn();
+                    onPressed: () async {
+                      final isAuthenticated =
+                          await authProvider.handleSignInWithGoogle();
+                      if (isAuthenticated) {
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          '/home',
+                          (Route<dynamic> route) => false,
+                        );
+                      }
                     },
                   ),
                 ),

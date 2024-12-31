@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:my_garden/data/usecase/authentication_provider.dart';
+import 'package:my_garden/data/usecase/remote_load_authentication.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'package:my_garden/ui/modules/home/home_page.dart';
 import 'ui/modules/order_summary/order_summary_page.dart';
@@ -28,7 +31,9 @@ Future<void> main() async {
     firstCamera = cameras.first;
   }
 
-  runApp(const MyGardenApp());
+  runApp(
+    const MyGardenApp(),
+  );
 }
 
 class MyGardenApp extends StatelessWidget {
@@ -36,33 +41,38 @@ class MyGardenApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        radioTheme: RadioThemeData(
-          fillColor: WidgetStateProperty.resolveWith<Color>((states) {
-            if (states.contains(WidgetState.selected)) {
-              return AppColors.primaryGreenColor;
-            }
-            return AppColors.backgroundColor;
-          }),
-        ),
+    return ChangeNotifierProvider(
+      create: (context) => AuthenticationProvider(
+        remoteLoadAuthentication: RemoteLoadAuthentication(),
       ),
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/login',
-      routes: {
-        '/splash': (context) => const SplashPage(),
-        '/login': (context) => const LoginPage(),
-        '/signup': (context) => const SignUpPage(),
-        '/onboarding': (context) => const OnboardingPage(),
-        '/home': (context) => const HomePage(),
-        '/product/details': (context) => const ProductDetailsPage(),
-        '/order': (context) => const OrderSummaryPage(),
-        '/payment': (context) => PaymentMethodPage(),
-        '/cart': (context) => const CartPage(),
-        '/order/details': (context) => const OrderDetails(),
-        '/shipping/address': (context) => const ShippingAddressPage(),
-        '/search/plant': (context) => SearchPlantPage(camera: firstCamera),
-      },
+      child: MaterialApp(
+        theme: ThemeData(
+          radioTheme: RadioThemeData(
+            fillColor: WidgetStateProperty.resolveWith<Color>((states) {
+              if (states.contains(WidgetState.selected)) {
+                return AppColors.primaryGreenColor;
+              }
+              return AppColors.backgroundColor;
+            }),
+          ),
+        ),
+        debugShowCheckedModeBanner: false,
+        initialRoute: '/splash',
+        routes: {
+          '/splash': (context) => const SplashPage(),
+          '/login': (context) => const LoginPage(),
+          '/signup': (context) => const SignUpPage(),
+          '/onboarding': (context) => const OnboardingPage(),
+          '/home': (context) => const HomePage(),
+          '/product/details': (context) => const ProductDetailsPage(),
+          '/order': (context) => const OrderSummaryPage(),
+          '/payment': (context) => PaymentMethodPage(),
+          '/cart': (context) => const CartPage(),
+          '/order/details': (context) => const OrderDetails(),
+          '/shipping/address': (context) => const ShippingAddressPage(),
+          '/search/plant': (context) => SearchPlantPage(camera: firstCamera),
+        },
+      ),
     );
   }
 }

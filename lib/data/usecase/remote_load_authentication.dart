@@ -35,11 +35,11 @@ class RemoteLoadAuthentication {
     }
   }
 
-  Future<User?> signInWithGoogle() async {
+  Future<bool> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       if (googleUser == null) {
-        return null;
+        return false;
       }
 
       final GoogleSignInAuthentication googleAuth =
@@ -50,16 +50,16 @@ class RemoteLoadAuthentication {
         idToken: googleAuth.idToken,
       );
 
-      final UserCredential userCredential =
-          await _firebaseAuth.signInWithCredential(credential);
-      return userCredential.user;
+      await _firebaseAuth.signInWithCredential(credential);
+
+      return true;
     } on FirebaseAuthException catch (e) {
       _handleAuthError(e);
     } catch (e) {
       throw Exception('Login falhou ou foi cancelado $e');
     }
 
-    return null;
+    return true;
   }
 
   Future<void> signOut() async {
@@ -70,6 +70,10 @@ class RemoteLoadAuthentication {
     } catch (e) {
       throw Exception('Erro ao deslogar $e');
     }
+  }
+
+  User? getCurrentUser() {
+    return _firebaseAuth.currentUser;
   }
 
   String _handleAuthError(FirebaseAuthException e) {
