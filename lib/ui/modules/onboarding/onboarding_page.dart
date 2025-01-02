@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_garden/shared/utils/app_colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
-import '../../../shared/utils/app_colors.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -12,7 +11,6 @@ class OnboardingPage extends StatefulWidget {
 
 class OnboardingPageState extends State<OnboardingPage> {
   final PageController _pageController = PageController();
-
   int currentPage = 0;
 
   void onPageChanged(int index) {
@@ -23,28 +21,29 @@ class OnboardingPageState extends State<OnboardingPage> {
 
   List<OnbordingData> imagePaths = [
     OnbordingData(
-      'lib/ui/assets/images/primeira_planta.png',
-      'Best collection of\n',
-      'indoor & outdoor ',
-      'Lorem ipsom dolor sit amet, consectetur\n adipscing elit. Fringillain sed risus sit.',
+      'lib/ui/modules/assets/images/tomate.png',
+      'Sementes de ',
+      'tomate',
+      'Nossas sementes são sinônimo de \n qualidade e alta produtividade.',
     ),
     OnbordingData(
-      'lib/ui/assets/images/segunda_planta.png',
-      'Keep your\n plants ',
-      'alive',
-      'Lorem ipsom dolor sit amet, consectetur\n adipscing elit. Fringillain sed risus sit.',
+      'lib/ui/modules/assets/images/alface.png',
+      'Sementes de  ',
+      'alface',
+      'Selecionadas e desenvolvidas para oferecer alto desempenho,\n resistência a doenças e adaptabilidade às mais diversas condições de cultivo',
     ),
     OnbordingData(
-      'lib/ui/assets/images/terceira_planta.png',
-      'Plan a tree & \n green the ',
-      'earth',
-      'Lorem ipsom dolor sit amet, consectetur\n adipscing elit. Fringillain sed risus sit.',
+      'lib/ui/modules/assets/images/semente.png',
+      'Mais de 40 tipos de ',
+      'sementes.',
+      'Crescendo plantas vigorosas e frutos de altíssima qualidade, com sabor, \n cor e textura  que atendem aos padrões mais exigentes do mercado.',
     ),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xfff5f5f5),
+      backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -76,7 +75,7 @@ class OnboardingPageState extends State<OnboardingPage> {
                                   TextSpan(
                                     text: imagePaths[index].titleBlack,
                                     style: const TextStyle(
-                                      color: Colors.black,
+                                      color: AppColors.primaryDarkColor,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 25,
                                     ),
@@ -97,7 +96,7 @@ class OnboardingPageState extends State<OnboardingPage> {
                                   textAlign: TextAlign.center,
                                   imagePaths[index].description,
                                   style: const TextStyle(
-                                    fontSize: 14,
+                                    fontSize: 16,
                                   ),
                                 ),
                               ),
@@ -117,7 +116,7 @@ class OnboardingPageState extends State<OnboardingPage> {
                 dotHeight: 4,
                 dotWidth: 4,
                 activeDotColor: AppColors.primaryGreenColor,
-                dotColor: AppColors.primaryGreyColor,
+                dotColor: AppColors.primaryGreenColor,
               ),
             ),
           ],
@@ -129,16 +128,19 @@ class OnboardingPageState extends State<OnboardingPage> {
         child: currentPage == 2
             ? ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    backgroundColor: AppColors.primaryGreenColor,
-                    fixedSize: const Size(335, 56)),
-                onPressed: () {},
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  backgroundColor: AppColors.primaryGreenColor,
+                  fixedSize: const Size(335, 56),
+                ),
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, '/login');
+                },
                 child: const Text(
-                  'Get Started',
+                  'Começar',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: AppColors.primaryWhiteColor,
                     fontSize: 15,
                   ),
                 ),
@@ -150,11 +152,18 @@ class OnboardingPageState extends State<OnboardingPage> {
                     style: TextButton.styleFrom(
                       padding: EdgeInsets.zero,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      if (currentPage > 0) {
+                        _pageController.previousPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeIn,
+                        );
+                      }
+                    },
                     child: const Text(
-                      'Skip',
+                      'Voltar',
                       style: TextStyle(
-                        color: Colors.black,
+                        color: AppColors.primaryDarkColor,
                         fontSize: 15,
                       ),
                     ),
@@ -166,11 +175,18 @@ class OnboardingPageState extends State<OnboardingPage> {
                         ),
                         backgroundColor: AppColors.primaryGreenColor,
                         fixedSize: const Size(138, 56)),
-                    onPressed: () {},
+                    onPressed: () {
+                      if (currentPage < 2) {
+                        _pageController.nextPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeIn,
+                        );
+                      }
+                    },
                     child: const Text(
-                      'Next',
+                      'Próximo',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: AppColors.primaryWhiteColor,
                         fontSize: 15,
                       ),
                     ),

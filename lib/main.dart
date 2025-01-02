@@ -51,9 +51,9 @@ class MyGardenApp extends StatelessWidget {
       initialRoute: '/splash',
       routes: {
         '/splash': (context) => const SplashPage(),
+        '/onboarding': (context) => const OnboardingPage(),
         '/login': (context) => const LoginPage(),
         '/signup': (context) => const SignUpPage(),
-        '/onboarding': (context) => const OnboardingPage(),
         '/home': (context) => const HomePage(),
         '/product/details': (context) => const ProductDetailsPage(),
         '/order': (context) => const OrderSummaryPage(),

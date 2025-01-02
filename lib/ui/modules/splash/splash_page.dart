@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_garden/shared/utils/app_colors.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -9,18 +10,39 @@ class SplashPage extends StatefulWidget {
 
 class SplashPageState extends State<SplashPage> {
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacementNamed('/onboarding');
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('lib/ui/assets/images/splash.png'),
-            fit: BoxFit.cover,
+      backgroundColor: AppColors.primaryGreenColor,
+      body: Center(
+        child: RichText(
+          textAlign: TextAlign.center,
+          text: const TextSpan(
+            text: 'feltrin\n',
+            style: TextStyle(
+              fontSize: 60,
+              fontWeight: FontWeight.bold,
+              color: AppColors.primaryWhiteColor,
+              height: 1,
+            ),
+            children: [
+              TextSpan(
+                text: '           SEMENTES',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.normal,
+                  color: AppColors.primaryWhiteColor,
+                ),
+              ),
+            ],
           ),
         ),
       ),
