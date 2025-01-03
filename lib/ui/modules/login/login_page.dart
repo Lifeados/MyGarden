@@ -4,6 +4,8 @@ import 'package:my_garden/data/usecase/remote_load_authentication.dart';
 import 'package:my_garden/domain/validators/email_validator.dart';
 import 'package:my_garden/domain/validators/password_validator.dart';
 import 'package:my_garden/shared/components/custom_button.dart';
+import 'package:provider/provider.dart';
+import '../../../data/usecase/authentication_provider.dart';
 import '../../../shared/utils/app_colors.dart';
 import '../../helpers/i18n/resources.dart';
 import '../../../shared/components/custom_text_field.dart';
@@ -51,6 +53,10 @@ class LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthenticationProvider>(
+      context,
+      listen: false,
+    );
     return Scaffold(
       backgroundColor: AppColors.primaryWhiteColor,
       body: SafeArea(
@@ -166,41 +172,28 @@ class LoginPageState extends State<LoginPage> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 32, bottom: 32),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    spacing: 10,
-                    children: [
-                      Expanded(
-                        child: CustomButton(
-                          icon: SvgPicture.asset(
-                            'lib/ui/assets/icons/google.svg',
-                            width: 26,
-                          ),
-                          label: 'Google',
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: AppColors.primaryDarkColor,
-                          ),
-                          isOutlined: true,
-                          onPressed: () {},
-                        ),
-                      ),
-                      Expanded(
-                        child: CustomButton(
-                          icon: Image.asset(
-                            'lib/ui/assets/icons/facebook.png',
-                            width: 24,
-                          ),
-                          label: 'Facebook',
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: AppColors.primaryDarkColor,
-                          ),
-                          isOutlined: true,
-                          onPressed: () {},
-                        ),
-                      ),
-                    ],
+                  child: CustomButton(
+                    icon: SvgPicture.asset(
+                      'lib/ui/assets/icons/google.svg',
+                      width: 26,
+                    ),
+                    label: 'Google',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: AppColors.primaryDarkColor,
+                    ),
+                    isOutlined: true,
+                    onPressed: () async {
+                      final isAuthenticated =
+                          await authProvider.handleSignInWithGoogle();
+                      if (isAuthenticated) {
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          '/home',
+                          (Route<dynamic> route) => false,
+                        );
+                      }
+                    },
                   ),
                 ),
                 Row(

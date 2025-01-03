@@ -12,7 +12,20 @@
           "package_name": "com.example.my_garden"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "400002344582-n5ajocj08v2ti4vadgqj3fu2sf119a5n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.my_garden",
+            "certificate_hash": "80084f5a0a79029a508f48033d4c0531310d8b61"
+          }
+        },
+        {
+          "client_id": "400002344582-og0h46nidrtg8kkpejepdmqs0alkrmbc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAvEl04_f2LgLJ-nvp--CSYAjnD7b3QJ-M"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "400002344582-og0h46nidrtg8kkpejepdmqs0alkrmbc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "400002344582-oh1vtq4a0fikagub9b1fc5h64kb8r0o5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.myGarden"
+              }
+            }
+          ]
         }
       }
     }

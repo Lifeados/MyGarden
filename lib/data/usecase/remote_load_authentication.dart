@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class RemoteLoadAuthentication {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   Future<User?> createUser({
     required String email,
@@ -31,6 +33,47 @@ class RemoteLoadAuthentication {
     } on FirebaseAuthException catch (e) {
       throw _handleAuthError(e);
     }
+  }
+
+  Future<bool> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      if (googleUser == null) {
+        return false;
+      }
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      final OAuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      await _firebaseAuth.signInWithCredential(credential);
+
+      return true;
+    } on FirebaseAuthException catch (e) {
+      _handleAuthError(e);
+    } catch (e) {
+      throw Exception('Login falhou ou foi cancelado $e');
+    }
+
+    return true;
+  }
+
+  Future<void> signOut() async {
+    try {
+      await _googleSignIn.signOut();
+
+      await _firebaseAuth.signOut();
+    } catch (e) {
+      throw Exception('Erro ao deslogar $e');
+    }
+  }
+
+  User? getCurrentUser() {
+    return _firebaseAuth.currentUser;
   }
 
   String _handleAuthError(FirebaseAuthException e) {
