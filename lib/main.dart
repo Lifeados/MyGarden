@@ -1,8 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:my_garden/data/usecase/authentication_provider.dart';
-import 'package:my_garden/data/usecase/remote_load_authentication.dart';
+import 'package:my_garden/data/usecase/remote_load_product.dart';
+import 'package:my_garden/ui/modules/base/base_page.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'package:my_garden/ui/modules/home/home_page.dart';
@@ -32,7 +33,17 @@ Future<void> main() async {
   }
 
   runApp(
-    const MyGardenApp(),
+    MultiProvider(
+      providers: [
+        Provider(create: (context) => FirebaseFirestore.instance),
+        Provider(
+          create: (context) => RemoteLoadProduct(
+            firestore: Provider.of<FirebaseFirestore>(context, listen: false),
+          ),
+        ),
+      ],
+      child: const MyGardenApp(),
+    ),
   );
 }
 
@@ -41,38 +52,34 @@ class MyGardenApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => AuthenticationProvider(
-        remoteLoadAuthentication: RemoteLoadAuthentication(),
-      ),
-      child: MaterialApp(
-        theme: ThemeData(
-          radioTheme: RadioThemeData(
-            fillColor: WidgetStateProperty.resolveWith<Color>((states) {
-              if (states.contains(WidgetState.selected)) {
-                return AppColors.primaryGreenColor;
-              }
-              return AppColors.backgroundColor;
-            }),
-          ),
+    return MaterialApp(
+      theme: ThemeData(
+        radioTheme: RadioThemeData(
+          fillColor: WidgetStateProperty.resolveWith<Color>((states) {
+            if (states.contains(WidgetState.selected)) {
+              return AppColors.primaryGreenColor;
+            }
+            return AppColors.backgroundColor;
+          }),
         ),
-        debugShowCheckedModeBanner: false,
-        initialRoute: '/splash',
-        routes: {
-          '/splash': (context) => const SplashPage(),
-          '/login': (context) => const LoginPage(),
-          '/signup': (context) => const SignUpPage(),
-          '/onboarding': (context) => const OnboardingPage(),
-          '/home': (context) => const HomePage(),
-          '/product/details': (context) => const ProductDetailsPage(),
-          '/order': (context) => const OrderSummaryPage(),
-          '/payment': (context) => PaymentMethodPage(),
-          '/cart': (context) => const CartPage(),
-          '/order/details': (context) => const OrderDetails(),
-          '/shipping/address': (context) => const ShippingAddressPage(),
-          '/search/plant': (context) => SearchPlantPage(camera: firstCamera),
-        },
       ),
+      debugShowCheckedModeBanner: false,
+      initialRoute: '/base',
+      routes: {
+        '/base': (context) => const BasePage(),
+        '/splash': (context) => const SplashPage(),
+        '/login': (context) => const LoginPage(),
+        '/signup': (context) => const SignUpPage(),
+        '/onboarding': (context) => const OnboardingPage(),
+        '/home': (context) => const HomePage(),
+        '/product/details': (context) => const ProductDetailsPage(),
+        '/order': (context) => const OrderSummaryPage(),
+        '/payment': (context) => PaymentMethodPage(),
+        '/cart': (context) => const CartPage(),
+        '/order/details': (context) => const OrderDetails(),
+        '/shipping/address': (context) => const ShippingAddressPage(),
+        '/search/plant': (context) => SearchPlantPage(camera: firstCamera),
+      },
     );
   }
 }
