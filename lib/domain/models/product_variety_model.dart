@@ -1,6 +1,7 @@
 class ProductVarietyModel {
   final String name;
   final String weight;
+  final String reference;
   final double price;
   final bool isAvailable;
   final String imageUrl;
@@ -8,6 +9,7 @@ class ProductVarietyModel {
   ProductVarietyModel({
     required this.name,
     required this.weight,
+    required this.reference,
     required this.price,
     required this.isAvailable,
     required this.imageUrl,
@@ -17,6 +19,7 @@ class ProductVarietyModel {
     return ProductVarietyModel(
       name: json['name'],
       weight: json['weight'] * 1.0,
+      reference: json['reference'],
       price: json['price'] * 1.0,
       isAvailable: json['isAvailable'],
       imageUrl: json['imageUrl'],
@@ -27,6 +30,7 @@ class ProductVarietyModel {
     return {
       'name': name,
       'weight': weight,
+      'reference': reference,
       'price': price,
       'isAvailable': isAvailable,
       'imageUrl': imageUrl,
