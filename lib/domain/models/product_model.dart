@@ -1,35 +1,27 @@
+import 'package:my_garden/domain/models/product_variety_model.dart';
+
 class ProductModel {
-  final String name;
-  final String reference;
-  final String imageUrl;
-  final double weight;
-  final double price;
-  final bool isAvailable;
-  final int quantity;
-  final List<String> varieties;
+  final String product;
+  final List<ProductVarietyModel> varieties;
 
   ProductModel({
-    required this.name,
-    required this.reference,
-    required this.imageUrl,
-    required this.weight,
-    required this.price,
-    required this.isAvailable,
-    this.quantity = 0,
-    this.varieties = const [],
+    required this.product,
+    required this.varieties,
   });
 
   factory ProductModel.fromMap(Map<String, dynamic> json) {
     return ProductModel(
-      name: json['name'],
-      reference: json['reference'],
-      imageUrl: json['imageUrl'],
-      weight: json['weight'],
-      price: json['price'],
-      isAvailable: json['isAvailable'],
-      quantity: json['quantity'] ?? 0,
-      varieties:
-          (json['varieties'] as List<dynamic>).map((e) => e as String).toList(),
+      product: json['product'],
+      varieties: (json['varieties'] as List)
+          .map((e) => ProductVarietyModel.fromJson(e))
+          .toList(),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'product': product,
+      'varieties': varieties.map((e) => e.toJson()).toList(),
+    };
   }
 }
