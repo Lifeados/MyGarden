@@ -1,17 +1,17 @@
 import 'package:my_garden/domain/models/product_category_model.dart';
 
 class ProductModel {
-  final String name;
+  final String product;
   final List<ProductCategoryModel> categories;
 
   ProductModel({
-    required this.name,
+    required this.product,
     required this.categories,
   });
 
   factory ProductModel.fromMap(Map<String, dynamic> json) {
     return ProductModel(
-      name: json['name'],
+      product: json['product'],
       categories: (json['categories'] as List)
           .map((e) => ProductCategoryModel.fromJson(e))
           .toList(),
@@ -20,7 +20,7 @@ class ProductModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'name': name,
+      'product': product,
       'categories': categories.map((e) => e.toJson()).toList(),
     };
   }
