@@ -1,27 +1,51 @@
-import 'package:my_garden/domain/models/product_category_model.dart';
-
 class ProductModel {
-  final String product;
-  final List<ProductCategoryModel> categories;
+  final String name;
+  final String weight;
+  final String category;
+  final String reference;
+  final double price;
+  final String imageUrl;
+  final String cicle;
+  final String plantingTime;
+  final bool isAvailable;
 
   ProductModel({
-    required this.product,
-    required this.categories,
+    required this.name,
+    required this.weight,
+    required this.category,
+    required this.reference,
+    required this.price,
+    required this.imageUrl,
+    required this.cicle,
+    required this.plantingTime,
+    required this.isAvailable,
   });
 
-  factory ProductModel.fromMap(Map<String, dynamic> json) {
+  factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
-      product: json['product'],
-      categories: (json['categories'] as List)
-          .map((e) => ProductCategoryModel.fromJson(e))
-          .toList(),
+      name: json['name'],
+      weight: json['weight'],
+      category: json['category'],
+      reference: json['reference'],
+      price: json['price'] * 1.0,
+      imageUrl: json['imageUrl'],
+      cicle: json['cicle'],
+      plantingTime: json['plantingTime'],
+      isAvailable: json['isAvailable'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'product': product,
-      'categories': categories.map((e) => e.toJson()).toList(),
+      'name': name,
+      'weight': weight,
+      'category': category,
+      'reference': reference,
+      'price': price,
+      'imageUrl': imageUrl,
+      'cicle': cicle,
+      'plantingTime': plantingTime,
+      'isAvailable': isAvailable,
     };
   }
 }
