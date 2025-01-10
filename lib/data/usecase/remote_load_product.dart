@@ -12,7 +12,7 @@ class RemoteLoadProduct {
     try {
       final snapshot = await firestore.collection('products').get();
       return snapshot.docs
-          .map((doc) => ProductModel.fromMap(doc.data()))
+          .map((doc) => ProductModel.fromJson(doc.data()))
           .toList();
     } catch (e) {
       throw Exception('Erro ao carregar os produtos: $e');

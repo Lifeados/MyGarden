@@ -2,71 +2,86 @@ import 'package:flutter/material.dart';
 import 'package:my_garden/shared/utils/app_colors.dart';
 
 class CustomSeedCard extends StatelessWidget {
-  const CustomSeedCard({super.key});
+  final String imageUrl;
+  final String title;
+  final String category;
+  final double price;
+  final VoidCallback onTap;
+  const CustomSeedCard({
+    super.key,
+    required this.imageUrl,
+    required this.title,
+    required this.category,
+    required this.price,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 230,
-      child: Card(
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
+    return GestureDetector(
+      onTap: onTap,
+      child: SizedBox(
+        width: 232,
+        child: Card(
+          margin: const EdgeInsets.symmetric(horizontal: 6),
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              ClipRRect(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(16),
                   topRight: Radius.circular(16),
                 ),
-                color: AppColors.backgroundColor,
+                child: Image.network(
+                  imageUrl,
+                  height: 200,
+                  fit: BoxFit.fill,
+                ),
               ),
-              child: Image.asset(
-                fit: BoxFit.contain,
-                'lib/ui/assets/images/peperomia_plant.png',
-                height: 164,
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: 12,
-                horizontal: 8,
-              ),
-              child: Column(
-                spacing: 8,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Peperomia Flex',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.primaryDarkColor,
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 12,
+                  right: 8,
+                  left: 8,
+                ),
+                child: Column(
+                  spacing: 4,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    FittedBox(
+                      child: Text(
+                        title,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.primaryDarkColor,
+                        ),
+                      ),
                     ),
-                  ),
-                  Text(
-                    'Qualquer',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: AppColors.secondaryGreyColor,
+                    Text(
+                      category,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: AppColors.secondaryGreyColor,
+                      ),
                     ),
-                  ),
-                  Text(
-                    '45.00',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: AppColors.primaryDarkColor,
-                      fontWeight: FontWeight.bold,
+                    Text(
+                      'R\$$price',
+                      style: const TextStyle(
+                        fontSize: 18,
+                        color: AppColors.primaryDarkColor,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            )
-          ],
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

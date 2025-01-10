@@ -23,7 +23,7 @@ class CustomBottomNavigationIcon extends StatelessWidget {
         color,
         BlendMode.srcIn,
       ),
-      height: 24,
+      height: 23,
     );
   }
 }
