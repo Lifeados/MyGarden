@@ -17,4 +17,6 @@ abstract class Translation {
   String get loginTextButton;
   String get termsAndConditions;
   String get termsAndConditionsButton;
+  String get greeting;
+  String get searchField;
 }

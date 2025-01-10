@@ -38,4 +38,8 @@ class PtBr implements Translation {
       "Ao começar, você concorda com nossos Termos de uso. ";
   @override
   String get termsAndConditionsButton => "Termos de uso.";
+  @override
+  String get greeting => "Olá, \n";
+  @override
+  String get searchField => "Pesquise aqui";
 }
