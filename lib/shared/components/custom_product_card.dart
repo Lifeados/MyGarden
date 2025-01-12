@@ -70,6 +70,7 @@ class CustomProductCard extends StatelessWidget {
                           fontSize: 14,
                           color: AppColors.secondaryGreyColor,
                         ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     Text(
