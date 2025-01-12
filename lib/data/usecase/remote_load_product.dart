@@ -18,4 +18,20 @@ class RemoteLoadProduct {
       throw Exception('Erro ao carregar os produtos: $e');
     }
   }
+
+  Future<List<ProductModel>> searchByQuery(String query) async {
+    try {
+      final snapshot = await firestore
+          .collection('products')
+          .where('name', isGreaterThanOrEqualTo: query)
+          .where('name', isLessThanOrEqualTo: '$query\uf8ff')
+          .get();
+
+      return snapshot.docs
+          .map((doc) => ProductModel.fromJson(doc.data()))
+          .toList();
+    } catch (e) {
+      throw Exception('Erro ao pesquisar produto: $e');
+    }
+  }
 }
