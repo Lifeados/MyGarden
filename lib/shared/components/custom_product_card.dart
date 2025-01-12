@@ -21,8 +21,8 @@ class CustomProductCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 300,
-        width: 218,
+        width: 210,
+        margin: const EdgeInsets.only(right: 12),
         decoration: BoxDecoration(
           color: AppColors.primaryWhiteColor,
           borderRadius: BorderRadius.circular(16),
@@ -51,7 +51,6 @@ class CustomProductCard extends StatelessWidget {
                   left: 10,
                 ),
                 child: Column(
-                  spacing: 4,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -63,21 +62,24 @@ class CustomProductCard extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    Text(
-                      category,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: AppColors.secondaryGreyColor,
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: Text(
+                        category,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: AppColors.secondaryGreyColor,
+                        ),
                       ),
                     ),
                     Text(
-                      'R\$$price',
+                      'R\$ ${price.toStringAsFixed(2)}',
                       style: const TextStyle(
                         fontSize: 18,
                         color: AppColors.primaryDarkColor,
                         fontWeight: FontWeight.bold,
                       ),
-                    ),
+                    )
                   ],
                 ),
               ),
