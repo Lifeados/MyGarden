@@ -32,6 +32,7 @@ class _BasePageState extends State<BasePage> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: AppColors.primaryWhiteColor,
         currentIndex: currentPageIndex,
         onTap: (index) {
           setState(() {

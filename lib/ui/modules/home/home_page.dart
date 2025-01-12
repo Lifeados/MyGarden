@@ -34,7 +34,9 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final remoteLoadProduct = Provider.of<RemoteLoadProduct>(context);
+
     return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Builder(
@@ -97,8 +99,8 @@ class HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.only(
                 top: 32,
-                right: 12,
-                left: 12,
+                right: 6,
+                left: 16,
                 bottom: 16,
               ),
               child: Row(
@@ -142,62 +144,45 @@ class HomePageState extends State<HomePage> {
                 } else {
                   final products = snapshot.data ?? [];
 
-                  return CustomCarousel(
-                    items: products,
-                  );
-                }
-              },
-            ),
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 32,
-                right: 12,
-                left: 12,
-                bottom: 16,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Destaques',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'Ver todos',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: AppColors.primaryGreenColor,
+                  return Column(
+                    children: [
+                      CustomCarousel(
+                        items: products,
                       ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            FutureBuilder(
-              future: remoteLoadProduct.load(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (snapshot.hasError) {
-                  return const Center(
-                    child: Text('Erro ao carregar produtos'),
-                  );
-                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(
-                    child: Text('Nenhum produto encontrado.'),
-                  );
-                } else {
-                  final products = snapshot.data ?? [];
-
-                  return CustomCarousel(
-                    items: products,
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: 32,
+                          right: 6,
+                          left: 16,
+                          bottom: 16,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              'Destaques',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {},
+                              child: const Text(
+                                'Ver todos',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: AppColors.primaryGreenColor,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      CustomCarousel(
+                        items: products,
+                      ),
+                    ],
                   );
                 }
               },
