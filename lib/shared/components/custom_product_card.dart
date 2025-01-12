@@ -22,7 +22,7 @@ class CustomProductCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         height: 300,
-        width: 230,
+        width: 218,
         decoration: BoxDecoration(
           color: AppColors.primaryWhiteColor,
           borderRadius: BorderRadius.circular(16),
@@ -47,8 +47,8 @@ class CustomProductCard extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(
                   top: 12,
-                  right: 16,
-                  left: 16,
+                  right: 10,
+                  left: 10,
                 ),
                 child: Column(
                   spacing: 4,
