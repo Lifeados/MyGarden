@@ -1,13 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:my_garden/data/usecase/remote_load_product.dart';
+import 'package:my_garden/domain/models/product_model.dart';
 import 'package:my_garden/shared/components/custom_product_card.dart';
+import 'package:my_garden/shared/components/custom_text_field.dart';
 import 'package:my_garden/shared/utils/app_colors.dart';
+import 'package:my_garden/ui/modules/search/components/category_tile.dart';
 import 'package:provider/provider.dart';
 
-class SearchPage extends StatelessWidget {
-  SearchPage({super.key});
+class SearchPage extends StatefulWidget {
+  const SearchPage({super.key});
 
-  final searchController = TextEditingController();
+  @override
+  State<SearchPage> createState() => _SearchPageState();
+}
+
+class _SearchPageState extends State<SearchPage> {
+  String currentQuery = '';
+  String? selectedCategory;
+  List<ProductModel> filteredProducts = [];
+
+  void onUpdateSearchQuery(String query) {
+    setState(() {
+      currentQuery = query;
+      selectedCategory = null;
+      filteredProducts = [];
+    });
+  }
+
+  void filterByCategory(String category, List<ProductModel> allProducts) {
+    setState(() {
+      selectedCategory = category;
+      filteredProducts =
+          allProducts.where((product) => product.category == category).toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,54 +43,100 @@ class SearchPage extends StatelessWidget {
       backgroundColor: AppColors.backgroundColor,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.only(
+            left: 16,
+            top: 32,
+            right: 16,
+          ),
           child: Column(
+            spacing: 16,
             children: [
-              Container(
-                height: 100,
-                color: Colors.amber,
+              CustomTextField(
+                label: 'Procurar',
+                onChange: onUpdateSearchQuery,
               ),
-              FutureBuilder(
-                future: remoteLoadProduct.load(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else if (snapshot.hasError) {
-                    return const Center(
-                      child: Text('Erro ao carregar produtos'),
-                    );
-                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return const Center(
-                      child: Text('Nenhum produto encontrado.'),
-                    );
-                  } else {
-                    final products = snapshot.data ?? [];
+              Expanded(
+                child: FutureBuilder(
+                  future: currentQuery.isEmpty
+                      ? remoteLoadProduct.load()
+                      : remoteLoadProduct.searchByQuery(currentQuery),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (snapshot.hasError) {
+                      return const Center(
+                        child: Text('Erro ao carregar produtos'),
+                      );
+                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      return const Center(
+                        child: Text('Nenhum produto encontrado.'),
+                      );
+                    } else {
+                      final products = snapshot.data ?? [];
+                      final Set<String> categories =
+                          products.map((e) => e.category).toSet();
+                      final productsToShow = selectedCategory == null
+                          ? products
+                          : filteredProducts;
 
-                    return Expanded(
-                      child: GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 10,
-                          childAspectRatio: 1 / 1.7,
-                        ),
-                        itemCount: products.length,
-                        itemBuilder: (context, index) {
-                          final product = products[index];
-                          return CustomProductCard(
-                            imageUrl: product.imageUrl,
-                            name: product.name,
-                            category: product.category,
-                            price: product.price,
-                            onTap: () {},
-                          );
-                        },
-                      ),
-                    );
-                  }
-                },
+                      return Column(
+                        children: [
+                          currentQuery != ''
+                              ? Padding(
+                                  padding: const EdgeInsets.only(bottom: 16),
+                                  child: SizedBox(
+                                    height: 32,
+                                    child: ListView.separated(
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder: (context, index) {
+                                        final categoriesList =
+                                            categories.toList();
+                                        final category = categoriesList[index];
+                                        return CategoryTile(
+                                          category: category,
+                                          isSelected:
+                                              category == selectedCategory,
+                                          onTap: () => filterByCategory(
+                                              category, products),
+                                        );
+                                      },
+                                      separatorBuilder: (context, index) =>
+                                          const SizedBox(
+                                        width: 10,
+                                      ),
+                                      itemCount: categories.length,
+                                    ),
+                                  ),
+                                )
+                              : const SizedBox.shrink(),
+                          Expanded(
+                            child: GridView.builder(
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 10,
+                                childAspectRatio: 1 / 1.7,
+                              ),
+                              itemCount: productsToShow.length,
+                              itemBuilder: (context, index) {
+                                final product = productsToShow[index];
+                                return CustomProductCard(
+                                  imageUrl: product.imageUrl,
+                                  name: product.name,
+                                  category: product.category,
+                                  price: product.price,
+                                  onTap: () {},
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                  },
+                ),
               ),
             ],
           ),
