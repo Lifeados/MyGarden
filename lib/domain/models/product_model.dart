@@ -23,9 +23,9 @@ class ProductModel {
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
-      name: json['name'],
+      name: _capitalizeWords(word: json['name']),
       weight: json['weight'],
-      category: json['category'],
+      category: _capitalizeWords(word: json['category']),
       reference: json['reference'],
       price: json['price'] * 1.0,
       imageUrl: json['imageUrl'],
@@ -47,5 +47,17 @@ class ProductModel {
       'plantingTime': plantingTime,
       'isAvailable': isAvailable,
     };
+  }
+
+  static String _capitalizeWords({required String word}) {
+    if (word.isEmpty) {
+      return word;
+    }
+    return word.split(' ').map((e) {
+      if (e.isNotEmpty) {
+        return e[0].toUpperCase() + e.substring(1).toLowerCase();
+      }
+      return e;
+    }).join(' ');
   }
 }
