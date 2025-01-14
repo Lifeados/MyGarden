@@ -18,5 +18,15 @@ abstract class Translation {
   String get termsAndConditions;
   String get termsAndConditionsButton;
   String get greeting;
-  String get searchField;
+  String get cancelSearchButton;
+  String get searchFieldLabel;
+  String get errorLoadingProduts;
+  String get noProdutsFound;
+  String get myProfileLabel;
+  String get myOrderLabel;
+  String get settingsLabel;
+  String get helpLabel;
+  String get termsAndConditionsLabel;
+  String get privacyPolicyLabel;
+  String get buttonExitApp;
 }

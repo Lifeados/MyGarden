@@ -41,5 +41,25 @@ class PtBr implements Translation {
   @override
   String get greeting => "Olá, \n";
   @override
-  String get searchField => "Pesquise aqui";
+  String get cancelSearchButton => "Cancelar";
+  @override
+  String get searchFieldLabel => "Procurar";
+  @override
+  String get errorLoadingProduts => "Erro ao carregar produtos.";
+  @override
+  String get noProdutsFound => "Nenhum produto encontrado.";
+  @override
+  String get myProfileLabel => "Meu perfil";
+  @override
+  String get myOrderLabel => "Meus pedidos";
+  @override
+  String get settingsLabel => "Configurações";
+  @override
+  String get helpLabel => "Ajuda";
+  @override
+  String get termsAndConditionsLabel => "Termos e Condições";
+  @override
+  String get privacyPolicyLabel => "Política de privacidade";
+  @override
+  String get buttonExitApp => "Sair do aplicativo";
 }

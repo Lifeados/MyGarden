@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_garden/data/usecase/remote_load_authentication.dart';
+import 'package:my_garden/shared/components/custom_text_button.dart';
 import 'package:my_garden/shared/utils/app_colors.dart';
-import 'package:my_garden/ui/modules/home/components/menu_button_label.dart';
+import 'package:my_garden/ui/helpers/i18n/resources.dart';
 
 class CustomMenuDrawer extends StatelessWidget {
   final RemoteLoadAuthentication remoteLoadAuthentication;
@@ -25,77 +26,60 @@ class CustomMenuDrawer extends StatelessWidget {
                 'lib/ui/assets/images/logo.svg',
               ),
             ),
-            MenuButtonLabel(
+            CustomTextButton(
               icon: 'lib/ui/assets/icons/profile.svg',
-              label: 'My profile',
+              label: R.string.myProfileLabel,
               onPressed: () {},
             ),
-            MenuButtonLabel(
-              icon: 'lib/ui/assets/icons/location.svg',
-              label: 'My Address',
-              onPressed: () {},
-            ),
-            MenuButtonLabel(
+            CustomTextButton(
               icon: 'lib/ui/assets/icons/orderbox.svg',
-              label: 'My Order',
+              label: R.string.myOrderLabel,
               onPressed: () {},
             ),
-            MenuButtonLabel(
-              icon: 'lib/ui/assets/icons/favorite.svg',
-              label: 'My Favorite',
-              onPressed: () {},
-            ),
-            MenuButtonLabel(
+            CustomTextButton(
               icon: 'lib/ui/assets/icons/settings.svg',
-              label: 'Settings',
+              label: R.string.settingsLabel,
               onPressed: () {},
             ),
-            MenuButtonLabel(
+            CustomTextButton(
               icon: 'lib/ui/assets/icons/support.svg',
-              label: 'Help & Support',
+              label: R.string.helpLabel,
               onPressed: () {},
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 32, bottom: 10),
-              child: Divider(
-                indent: 16,
-                endIndent: 16,
-                color: AppColors.primaryGreyColor,
-              ),
-            ),
-            MenuButtonLabel(
-              label: 'Política',
+            CustomTextButton(
+              icon: 'lib/ui/assets/icons/privacy.svg',
+              label: R.string.privacyPolicyLabel,
               onPressed: () {},
             ),
-            MenuButtonLabel(
-              label: 'Terms & Conditions',
+            CustomTextButton(
+              icon: 'lib/ui/assets/icons/termsAndConditions.svg',
+              label: R.string.termsAndConditionsLabel,
               onPressed: () {},
             ),
-            const SizedBox(
-              height: 18,
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  elevation: 0,
-                  backgroundColor: AppColors.primaryGreyColor,
-                  foregroundColor: AppColors.primaryDarkColor),
-              onPressed: () async {
-                await remoteLoadAuthentication.signOut();
-                Navigator.pushReplacementNamed(context, '/login');
-              },
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                spacing: 8,
-                children: [
-                  Text(
-                    'Sair do aplicativo',
-                    style: TextStyle(fontSize: 15),
-                  ),
-                  Icon(
-                    Icons.logout_sharp,
-                    color: AppColors.primaryDarkColor,
-                  ),
-                ],
+            Padding(
+              padding: const EdgeInsets.only(top: 116),
+              child: TextButton(
+                onPressed: () async {
+                  await remoteLoadAuthentication.signOut();
+                  Navigator.pushReplacementNamed(context, '/login');
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 8,
+                  children: [
+                    Text(
+                      R.string.buttonExitApp,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: AppColors.dangerColor,
+                      ),
+                    ),
+                    const Icon(
+                      Icons.logout_sharp,
+                      color: AppColors.dangerColor,
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
