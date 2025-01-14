@@ -4,6 +4,7 @@ import 'package:my_garden/domain/models/product_model.dart';
 import 'package:my_garden/shared/components/custom_product_card.dart';
 import 'package:my_garden/shared/components/custom_text_field.dart';
 import 'package:my_garden/shared/utils/app_colors.dart';
+import 'package:my_garden/ui/helpers/i18n/resources.dart';
 import 'package:my_garden/ui/modules/search/components/category_tile.dart';
 import 'package:provider/provider.dart';
 
@@ -15,6 +16,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  final searchController = TextEditingController();
   String currentQuery = '';
   String? selectedCategory;
   List<ProductModel> filteredProducts = [];
@@ -46,14 +48,42 @@ class _SearchPageState extends State<SearchPage> {
           padding: const EdgeInsets.only(
             left: 16,
             top: 32,
-            right: 16,
           ),
           child: Column(
             spacing: 16,
             children: [
-              CustomTextField(
-                label: 'Procurar',
-                onChange: onUpdateSearchQuery,
+              Row(
+                spacing: 6,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: CustomTextField(
+                      label: R.string.searchFieldLabel,
+                      onChange: onUpdateSearchQuery,
+                      inputController: searchController,
+                    ),
+                  ),
+                  currentQuery != ''
+                      ? TextButton(
+                          onPressed: () {
+                            setState(() {
+                              searchController.clear();
+                              selectedCategory = null;
+                              currentQuery = '';
+                            });
+                          },
+                          child: Text(
+                            R.string.cancelSearchButton,
+                            style: const TextStyle(
+                              color: AppColors.primaryGreenColor,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )
+                      : const SizedBox.shrink(),
+                ],
               ),
               Expanded(
                 child: FutureBuilder(
@@ -66,12 +96,12 @@ class _SearchPageState extends State<SearchPage> {
                         child: CircularProgressIndicator(),
                       );
                     } else if (snapshot.hasError) {
-                      return const Center(
-                        child: Text('Erro ao carregar produtos'),
+                      return Center(
+                        child: Text(R.string.errorLoadingProduts),
                       );
                     } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      return const Center(
-                        child: Text('Nenhum produto encontrado.'),
+                      return Center(
+                        child: Text(R.string.noProdutsFound),
                       );
                     } else {
                       final products = snapshot.data ?? [];
