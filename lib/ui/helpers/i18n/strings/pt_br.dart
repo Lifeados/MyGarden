@@ -62,4 +62,10 @@ class PtBr implements Translation {
   String get privacyPolicyLabel => "Política de privacidade";
   @override
   String get buttonExitApp => "Sair do aplicativo";
+  @override
+  String get launchesCarouselTitle => "Lançamentos";
+  @override
+  String get featuredCarouselTitle => "Destaques";
+  @override
+  String get seeMoreButtonText => "Ver mais";
 }

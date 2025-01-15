@@ -19,13 +19,11 @@ class CustomTextButton extends StatelessWidget {
     return TextButton(
       onPressed: onPressed,
       child: Row(
+        spacing: 12,
         children: [
           icon != null && icon!.isNotEmpty
               ? SvgPicture.asset(icon!)
               : const SizedBox.shrink(),
-          const SizedBox(
-            width: 10,
-          ),
           Text(
             label,
             style: const TextStyle(

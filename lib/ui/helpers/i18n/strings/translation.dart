@@ -29,4 +29,7 @@ abstract class Translation {
   String get termsAndConditionsLabel;
   String get privacyPolicyLabel;
   String get buttonExitApp;
+  String get launchesCarouselTitle;
+  String get featuredCarouselTitle;
+  String get seeMoreButtonText;
 }

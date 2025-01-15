@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:my_garden/data/usecase/local_load_camera.dart';
+import 'package:my_garden/data/usecase/remote_load_authentication.dart';
 import 'package:my_garden/data/usecase/remote_load_product.dart';
 import 'package:my_garden/ui/modules/base/base_page.dart';
 import 'package:provider/provider.dart';
@@ -21,8 +22,6 @@ import 'ui/modules/product_details/product_details_page.dart';
 import 'package:my_garden/ui/modules/signup/signup_page.dart';
 import 'ui/modules/splash/splash_page.dart';
 
-late final CameraDescription firstCamera;
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -33,9 +32,13 @@ void main() async {
     MultiProvider(
       providers: [
         Provider(create: (context) => FirebaseFirestore.instance),
+        Provider(create: (context) => RemoteLoadAuthentication()),
         Provider(
           create: (context) => RemoteLoadProduct(
-            firestore: Provider.of<FirebaseFirestore>(context, listen: false),
+            firestore: Provider.of<FirebaseFirestore>(
+              context,
+              listen: false,
+            ),
           ),
         ),
         FutureProvider<List<CameraDescription>>(
@@ -68,7 +71,7 @@ class MyGardenApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      initialRoute: '/base',
+      initialRoute: '/splash',
       routes: {
         '/base': (context) => const BasePage(),
         '/splash': (context) => const SplashPage(),
