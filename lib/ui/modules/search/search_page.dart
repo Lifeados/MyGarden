@@ -38,6 +38,12 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final remoteLoadProduct = Provider.of<RemoteLoadProduct>(context);
 
@@ -129,7 +135,9 @@ class _SearchPageState extends State<SearchPage> {
                                           isSelected:
                                               category == selectedCategory,
                                           onTap: () => filterByCategory(
-                                              category, products),
+                                            category,
+                                            products,
+                                          ),
                                         );
                                       },
                                       separatorBuilder: (context, index) =>
