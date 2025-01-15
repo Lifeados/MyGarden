@@ -4,6 +4,7 @@ import 'package:my_garden/ui/modules/base/components/custom_bottom_navigation_ic
 import 'package:my_garden/ui/modules/cart/cart_page.dart';
 import 'package:my_garden/ui/modules/home/home_page.dart';
 import 'package:my_garden/ui/modules/search/search_page.dart';
+import 'package:my_garden/ui/modules/plant_scanner/plant_scanner_page.dart';
 
 class BasePage extends StatefulWidget {
   const BasePage({super.key});
@@ -22,13 +23,11 @@ class _BasePageState extends State<BasePage> {
       body: PageView(
         controller: pageController,
         physics: const NeverScrollableScrollPhysics(),
-        children: [
-          const HomePage(),
+        children: const [
+          HomePage(),
           SearchPage(),
-          Container(
-            color: Colors.purple,
-          ),
-          const CartPage(),
+          PlantScannerPage(),
+          CartPage(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
