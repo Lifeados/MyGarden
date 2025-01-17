@@ -2,37 +2,51 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_garden/shared/utils/app_colors.dart';
+import 'package:provider/provider.dart';
 
-class SearchPlantPage extends StatefulWidget {
-  final CameraDescription camera;
-
-  const SearchPlantPage({
+class PlantScannerPage extends StatefulWidget {
+  const PlantScannerPage({
     super.key,
-    required this.camera,
   });
 
   @override
-  State<SearchPlantPage> createState() => SearchPlantPageState();
+  State<PlantScannerPage> createState() => PlantScannerPageState();
 }
 
-class SearchPlantPageState extends State<SearchPlantPage> {
-  late CameraController _controller;
+class PlantScannerPageState extends State<PlantScannerPage> {
+  CameraController? _controller;
   late Future<void> _initializeControllerFuture;
 
   @override
   void initState() {
     super.initState();
-    _controller = CameraController(
-      widget.camera,
-      ResolutionPreset.medium,
-    );
-    _initializeControllerFuture = _controller.initialize();
+    initializeCamera();
+  }
+
+  void initializeCamera() {
+    try {
+      final cameras = Provider.of<List<CameraDescription>>(
+        context,
+        listen: false,
+      );
+
+      if (cameras.isNotEmpty) {
+        final firstCamera = cameras.first;
+        _controller = CameraController(firstCamera, ResolutionPreset.high);
+        _initializeControllerFuture = _controller!.initialize();
+      } else {
+        throw Exception("Nenhuma câmera disponível no dispositivo.");
+      }
+    } catch (e) {
+      _initializeControllerFuture =
+          Future.error("Erro ao inicializar a câmera: $e");
+    }
   }
 
   @override
   void dispose() {
     super.dispose();
-    _controller.dispose();
+    _controller?.dispose();
   }
 
   @override
@@ -62,7 +76,21 @@ class SearchPlantPageState extends State<SearchPlantPage> {
             future: _initializeControllerFuture,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                return SizedBox.expand(child: CameraPreview(_controller));
+                if (_controller != null) {
+                  return SizedBox.expand(
+                    child: CameraPreview(
+                      _controller!,
+                    ),
+                  );
+                } else {
+                  return const Center(
+                    child: Text('Erro ao inicializar a câmera'),
+                  );
+                }
+              } else if (snapshot.hasError) {
+                return const Center(
+                  child: Text('Houve um problema'),
+                );
               } else {
                 return const Center(
                   child: CircularProgressIndicator(),
@@ -111,7 +139,7 @@ class SearchPlantPageState extends State<SearchPlantPage> {
                             ),
                           ),
                           child: Image.asset(
-                            'lib/ui/assets/images/primeira_planta.png',
+                            'lib/ui/assets/images/alface.png',
                           ),
                         ),
                         const Column(

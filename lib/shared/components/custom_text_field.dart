@@ -2,17 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:my_garden/shared/utils/app_colors.dart';
 
 class CustomTextField extends StatefulWidget {
+  final Widget? icon;
   final String label;
   final bool isSecret;
+  final Function(String)? onChange;
   final TextEditingController? inputController;
   final FormFieldValidator<String>? validator;
 
   const CustomTextField({
     super.key,
+    this.icon,
     required this.label,
-    required this.inputController,
+    this.inputController,
     this.isSecret = false,
     this.validator,
+    this.onChange,
   });
 
   @override
@@ -43,10 +47,12 @@ class CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: widget.inputController,
+      onChanged: widget.onChange,
       validator: handleValidator,
       obscureText: isObscureText,
       decoration: InputDecoration(
         labelText: widget.label,
+        labelStyle: const TextStyle(color: AppColors.secondaryGreyColor),
         isDense: true,
         floatingLabelStyle: TextStyle(
             color:
@@ -60,6 +66,8 @@ class CustomTextFieldState extends State<CustomTextField> {
           ),
           borderRadius: BorderRadius.circular(10),
         ),
+
+        prefixIcon: widget.icon,
 
         suffixIcon: widget.isSecret
             ? IconButton(

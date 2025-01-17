@@ -45,6 +45,7 @@ class SignUpPageState extends State<SignUpPage> {
   void handleSignUp() async {
     try {
       await _remoteLoadAuthentication.createUser(
+        name: firstNameController.text,
         email: emailController.text,
         password: passwordController.text,
       );

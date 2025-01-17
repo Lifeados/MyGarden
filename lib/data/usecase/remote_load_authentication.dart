@@ -6,6 +6,7 @@ class RemoteLoadAuthentication {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   Future<User?> createUser({
+    required String name,
     required String email,
     required String password,
   }) async {
@@ -14,7 +15,15 @@ class RemoteLoadAuthentication {
         email: email,
         password: password,
       );
-      return userCredential.user;
+
+      User? user = userCredential.user;
+      if (user != null) {
+        await user.updateDisplayName(name);
+        await user.reload();
+        user = _firebaseAuth.currentUser;
+      }
+
+      return user;
     } on FirebaseAuthException catch (e) {
       throw _handleAuthError(e);
     }
