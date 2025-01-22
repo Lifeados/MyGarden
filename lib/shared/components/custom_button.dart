@@ -34,14 +34,10 @@ class CustomButton extends StatelessWidget {
               ),
               onPressed: onPressed,
               child: Row(
+                spacing: 12,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if (icon != null) ...[
-                    icon!,
-                    const SizedBox(
-                      width: 8,
-                    )
-                  ],
+                  icon != null ? icon! : const SizedBox.shrink(),
                   Text(
                     label,
                     style: style,
@@ -63,14 +59,10 @@ class CustomButton extends StatelessWidget {
               ),
               onPressed: onPressed,
               child: Row(
+                spacing: 12,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if (icon != null) ...[
-                    icon!,
-                    const SizedBox(
-                      width: 8,
-                    )
-                  ],
+                  icon != null ? icon! : const SizedBox.shrink(),
                   Text(
                     label,
                     style: style,
