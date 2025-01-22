@@ -3,14 +3,10 @@ import 'package:my_garden/shared/utils/app_colors.dart';
 
 class CarouselLabel extends StatelessWidget {
   final String title;
-  final String textButton;
-  final VoidCallback onPressed;
 
   const CarouselLabel({
     super.key,
     required this.title,
-    required this.textButton,
-    required this.onPressed,
   });
 
   @override
@@ -28,18 +24,9 @@ class CarouselLabel extends StatelessWidget {
           Text(
             title,
             style: const TextStyle(
-              fontSize: 18,
+              color: AppColors.primaryDarkColor,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
-            ),
-          ),
-          TextButton(
-            onPressed: () {},
-            child: Text(
-              textButton,
-              style: const TextStyle(
-                fontSize: 14,
-                color: AppColors.primaryGreenColor,
-              ),
             ),
           ),
         ],

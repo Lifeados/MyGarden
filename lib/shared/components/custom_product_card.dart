@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:my_garden/shared/utils/app_colors.dart';
+import 'package:provider/provider.dart';
 
 class CustomProductCard extends StatelessWidget {
   final String imageUrl;
@@ -18,6 +20,10 @@ class CustomProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final numberFormatProvider = Provider.of<NumberFormat>(
+      context,
+      listen: false,
+    );
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -74,7 +80,7 @@ class CustomProductCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'R\$ ${price.toStringAsFixed(2)}',
+                      numberFormatProvider.format(price),
                       style: const TextStyle(
                         fontSize: 18,
                         color: AppColors.primaryDarkColor,
