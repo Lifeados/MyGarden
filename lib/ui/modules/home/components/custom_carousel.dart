@@ -23,7 +23,13 @@ class CustomCarousel extends StatelessWidget {
             name: item.name,
             category: item.category,
             price: item.price,
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                '/product/details',
+                arguments: item,
+              );
+            },
           );
         },
       ),

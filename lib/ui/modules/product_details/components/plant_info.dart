@@ -16,7 +16,7 @@ class PlantInfo extends StatelessWidget {
       text: TextSpan(
         text: '$label: ',
         style: const TextStyle(
-          fontSize: 14,
+          fontSize: 15,
           color: AppColors.primaryDarkColor,
           fontWeight: FontWeight.bold,
         ),
@@ -24,8 +24,9 @@ class PlantInfo extends StatelessWidget {
           TextSpan(
             text: information,
             style: const TextStyle(
-              fontSize: 14,
+              fontSize: 15,
               color: AppColors.secondaryGreyColor,
+              fontWeight: FontWeight.normal,
             ),
           )
         ],

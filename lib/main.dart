@@ -2,10 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:intl/intl.dart';
 import 'package:my_garden/data/usecase/local_load_camera.dart';
 import 'package:my_garden/data/usecase/remote_load_authentication.dart';
 import 'package:my_garden/data/usecase/remote_load_product.dart';
 import 'package:my_garden/ui/modules/base/base_page.dart';
+import 'package:my_garden/ui/modules/search/search_page.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'package:my_garden/ui/modules/home/home_page.dart';
@@ -39,6 +41,12 @@ void main() async {
               context,
               listen: false,
             ),
+          ),
+        ),
+        Provider(
+          create: (context) => NumberFormat.currency(
+            locale: 'pt_BR',
+            symbol: 'R\$',
           ),
         ),
         FutureProvider<List<CameraDescription>>(
@@ -86,6 +94,7 @@ class MyGardenApp extends StatelessWidget {
         '/order/details': (context) => const OrderDetails(),
         '/shipping/address': (context) => const ShippingAddressPage(),
         '/search/plant': (context) => const PlantScannerPage(),
+        '/search': (context) => const SearchPage(),
       },
     );
   }
