@@ -53,8 +53,6 @@ class HomePageState extends State<HomePage> {
                   style: IconButton.styleFrom(),
                   onPressed: () => Scaffold.of(context).openDrawer(),
                   icon: Container(
-                    height: 42,
-                    width: 42,
                     decoration: BoxDecoration(
                       color: AppColors.secondaryGreenColor,
                       borderRadius: BorderRadius.circular(10),
@@ -65,9 +63,14 @@ class HomePageState extends State<HomePage> {
                             child: Image.network(
                               '${currentUser!.photoURL}',
                               fit: BoxFit.contain,
+                              width: 42,
                             ),
                           )
-                        : Image.asset('lib/ui/assets/icons/user.png'),
+                        : Image.asset(
+                            'lib/ui/assets/icons/user.png',
+                            fit: BoxFit.contain,
+                            width: 42,
+                          ),
                   ),
                 ),
                 RichText(
@@ -96,51 +99,50 @@ class HomePageState extends State<HomePage> {
       ),
       drawer: const CustomMenuDrawer(),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            FutureBuilder(
-              future: remoteLoadProduct.load(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (snapshot.hasError) {
-                  return const Center(
-                    child: Text('Erro ao carregar produtos'),
-                  );
-                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(
-                    child: Text('Nenhum produto encontrado.'),
-                  );
-                } else {
-                  final products = snapshot.data ?? [];
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 32),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              FutureBuilder(
+                future: remoteLoadProduct.load(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text(R.string.errorLoadingProduts),
+                    );
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return Center(
+                      child: Text(R.string.noProdutsFound),
+                    );
+                  } else {
+                    final products = snapshot.data ?? [];
 
-                  return Column(
-                    children: [
-                      CarouselLabel(
-                        title: R.string.launchesCarouselTitle,
-                        textButton: R.string.seeMoreButtonText,
-                        onPressed: () {},
-                      ),
-                      CustomCarousel(
-                        items: products,
-                      ),
-                      CarouselLabel(
-                        title: R.string.featuredCarouselTitle,
-                        textButton: R.string.seeMoreButtonText,
-                        onPressed: () {},
-                      ),
-                      CustomCarousel(
-                        items: products,
-                      ),
-                    ],
-                  );
-                }
-              },
-            ),
-          ],
+                    return Column(
+                      children: [
+                        CarouselLabel(
+                          title: R.string.launchesCarouselTitle,
+                        ),
+                        CustomCarousel(
+                          items: products,
+                        ),
+                        CarouselLabel(
+                          title: R.string.featuredCarouselTitle,
+                        ),
+                        CustomCarousel(
+                          items: products,
+                        ),
+                      ],
+                    );
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

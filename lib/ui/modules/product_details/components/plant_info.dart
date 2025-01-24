@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_garden/shared/utils/app_colors.dart';
 
 class PlantInfo extends StatelessWidget {
   final String label;
@@ -11,28 +12,25 @@ class PlantInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 12,
-            color: Color(0xFF9AA09A),
-          ),
+    return RichText(
+      text: TextSpan(
+        text: '$label: ',
+        style: const TextStyle(
+          fontSize: 15,
+          color: AppColors.primaryDarkColor,
+          fontWeight: FontWeight.bold,
         ),
-        const SizedBox(
-          height: 5,
-        ),
-        Text(
-          information,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-            color: Color(0xFF0E110E),
-          ),
-        ),
-      ],
+        children: [
+          TextSpan(
+            text: information,
+            style: const TextStyle(
+              fontSize: 15,
+              color: AppColors.secondaryGreyColor,
+              fontWeight: FontWeight.normal,
+            ),
+          )
+        ],
+      ),
     );
   }
 }
