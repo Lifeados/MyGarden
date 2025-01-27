@@ -4,7 +4,7 @@ import 'package:my_garden/shared/utils/app_colors.dart';
 class CustomButton extends StatelessWidget {
   final String label;
   final Widget? icon;
-  final TextStyle? style;
+  final TextStyle? textStyle;
   final bool isOutlined;
   final VoidCallback onPressed;
 
@@ -14,7 +14,7 @@ class CustomButton extends StatelessWidget {
     required this.onPressed,
     this.isOutlined = false,
     this.icon,
-    this.style,
+    this.textStyle,
   });
 
   @override
@@ -28,19 +28,17 @@ class CustomButton extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 side: const BorderSide(
-                  width: 1,
                   color: AppColors.secondaryGreyColor,
                 ),
               ),
               onPressed: onPressed,
               child: Row(
-                spacing: 12,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   icon != null ? icon! : const SizedBox.shrink(),
                   Text(
                     label,
-                    style: style,
+                    style: textStyle,
                   ),
                 ],
               ),
@@ -59,13 +57,12 @@ class CustomButton extends StatelessWidget {
               ),
               onPressed: onPressed,
               child: Row(
-                spacing: 12,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   icon != null ? icon! : const SizedBox.shrink(),
                   Text(
                     label,
-                    style: style,
+                    style: textStyle,
                   ),
                 ],
               ),

@@ -68,4 +68,6 @@ class PtBr implements Translation {
   String get featuredCarouselTitle => "Destaques";
   @override
   String get seeMoreButtonText => "Ver mais";
+  @override
+  String get starButtonText => "Começar";
 }

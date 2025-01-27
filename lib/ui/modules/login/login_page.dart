@@ -146,7 +146,7 @@ class LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.symmetric(vertical: 32),
                   child: CustomButton(
                     label: R.string.loginTextButton,
-                    style: const TextStyle(
+                    textStyle: const TextStyle(
                       fontSize: 16,
                       color: AppColors.primaryWhiteColor,
                       fontWeight: FontWeight.w600,
@@ -189,7 +189,7 @@ class LoginPageState extends State<LoginPage> {
                       width: 26,
                     ),
                     label: 'Google',
-                    style: const TextStyle(
+                    textStyle: const TextStyle(
                       fontSize: 16,
                       color: AppColors.primaryDarkColor,
                     ),
