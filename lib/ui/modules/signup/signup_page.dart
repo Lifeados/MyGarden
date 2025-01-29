@@ -169,7 +169,7 @@ class SignUpPageState extends State<SignUpPage> {
                 ),
                 CustomButton(
                   label: R.string.registerTextButton,
-                  style: const TextStyle(
+                  textStyle: const TextStyle(
                     fontSize: 16,
                     color: AppColors.primaryWhiteColor,
                     fontWeight: FontWeight.w600,

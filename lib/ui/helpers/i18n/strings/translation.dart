@@ -32,4 +32,5 @@ abstract class Translation {
   String get launchesCarouselTitle;
   String get featuredCarouselTitle;
   String get seeMoreButtonText;
+  String get starButtonText;
 }
